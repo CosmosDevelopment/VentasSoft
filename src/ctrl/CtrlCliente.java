@@ -6,7 +6,7 @@ import entidades.Cliente;
 
 public class CtrlCliente {
     daoCliente dc= new daoCliente();
-    public void agregarProducto(Cliente c) throws Exception{
+    public void agregarCliente(Cliente c) throws Exception{
         dc.insertCliente(c);
     }
 }
