@@ -22,12 +22,7 @@ public class Productos extends javax.swing.JFrame {
      * Creates new form AddCliente
      */
     public Productos() {
-        
         initComponents();
-        
-        
-        
-        this.repaint();
     }
     
     /**
