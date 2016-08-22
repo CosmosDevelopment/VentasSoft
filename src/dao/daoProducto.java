@@ -27,7 +27,6 @@ public class daoProducto {
         session.save(pro);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -37,7 +36,6 @@ public class daoProducto {
         session.update(pro);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -47,7 +45,6 @@ public class daoProducto {
         session.delete(pro);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -58,7 +55,6 @@ public class daoProducto {
         ArrayList<Producto> pro = (ArrayList<Producto>) session.createQuery("From Producto").list();
         session.flush();
         tx.commit();
-        session.close();
         return pro;
     }
     
@@ -70,7 +66,6 @@ public class daoProducto {
         ArrayList<Producto> pro = (ArrayList<Producto>) query.list();
         session.flush();
         tx.commit();
-        session.close();
         return pro;
     }
     
@@ -80,7 +75,6 @@ public class daoProducto {
         ArrayList<Producto> pro = (ArrayList<Producto>) session.createQuery("From Producto pro where pro.id_producto="+id_producto).list();
         session.flush();
         tx.commit();
-        session.close();
         return pro;
     }
     
