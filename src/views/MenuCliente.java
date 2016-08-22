@@ -7,7 +7,11 @@ package views;
 
 import ctrl.CtrlCliente;
 import entidades.Cliente;
+import entidades.Producto;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author wasp
@@ -23,9 +27,7 @@ public class MenuCliente extends javax.swing.JFrame {
         panelMenuCliente.setAlignmentX(CENTER_ALIGNMENT);
         panelMenuCliente.setAlignmentY(CENTER_ALIGNMENT);
         
-        
         this.repaint();
-        listaClientes.removeAll();
         cbBuscarCliente.removeAllItems();
         cbBuscarCliente.addItem("RUT");
         cbBuscarCliente.addItem("Nombre");
@@ -48,11 +50,11 @@ public class MenuCliente extends javax.swing.JFrame {
         cbBuscarCliente = new javax.swing.JComboBox<>();
         txtBusqueda = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaClientes = new javax.swing.JList<>();
         botonAddCliente = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         btnBuscarCliente = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,16 +71,6 @@ public class MenuCliente extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Encontrados:");
-
-        listaClientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        listaClientes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listaClientes.setLayoutOrientation(javax.swing.JList.VERTICAL_WRAP);
-        jScrollPane1.setViewportView(listaClientes);
 
         botonAddCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addUser.png"))); // NOI18N
         botonAddCliente.setText("Agregar");
@@ -104,14 +96,40 @@ public class MenuCliente extends javax.swing.JFrame {
             }
         });
 
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "N° Cliente", "Nombre ", "Apellido", "Rut", "Dirección", "Moroso"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaClientes);
+
         javax.swing.GroupLayout panelMenuClienteLayout = new javax.swing.GroupLayout(panelMenuCliente);
         panelMenuCliente.setLayout(panelMenuClienteLayout);
         panelMenuClienteLayout.setHorizontalGroup(
             panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuClienteLayout.createSequentialGroup()
-                .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelMenuClienteLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                .addGap(0, 98, Short.MAX_VALUE)
+                .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuClienteLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMenuClienteLayout.createSequentialGroup()
                         .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(panelMenuClienteLayout.createSequentialGroup()
@@ -121,21 +139,12 @@ public class MenuCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscarCliente))
-                            .addComponent(jScrollPane1)))
+                                .addComponent(btnBuscarCliente)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelMenuClienteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botonAddCliente))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelMenuClienteLayout.createSequentialGroup()
-                        .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelMenuClienteLayout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(jLabel3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelMenuClienteLayout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(btnVolver)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(38, 38, 38))
+                        .addComponent(btnVolver)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonAddCliente))))
         );
         panelMenuClienteLayout.setVerticalGroup(
             panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,13 +158,13 @@ public class MenuCliente extends javax.swing.JFrame {
                     .addComponent(btnBuscarCliente))
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonAddCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addGap(34, 34, 34))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonAddCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolver))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -165,14 +174,14 @@ public class MenuCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(panelMenuCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 103, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(panelMenuCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -209,7 +218,40 @@ public class MenuCliente extends javax.swing.JFrame {
             else{
                 listaClientes=ctrlCliente.findByBusqueda(3, txtBusqueda.getText());
             }
-            System.out.println(listaClientes.size());
+            
+            if(txtBusqueda.getText().isEmpty() || txtBusqueda.getText()== null){
+                JOptionPane.showMessageDialog (null, "Debe ingresar el texto para la búsqueda", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                
+            }
+            else{
+                
+                DefaultTableModel modelo= (DefaultTableModel) tablaClientes.getModel();
+                System.out.println(listaClientes.size());
+                if(listaClientes.size()>0){
+                    String moroso="";
+                    for(Cliente c: listaClientes){
+                        String[] fila = new String[6];
+                        fila[0] = c.getNumeroCliente().toString();
+                        fila[1] = c.getNombreCompletoCliente();
+                        fila[2] = c.getNombreCompletoCliente();
+                        fila[3] = c.getRutCliente();
+                        fila[4] = c.getDireccionCliente();
+                        if(c.getMorosoCliente())
+                            moroso="SI";
+                        else
+                            moroso="NO";
+                        fila[5] = moroso;
+                        modelo.addRow(fila);
+                    }
+                    
+                }
+                else
+                    JOptionPane.showMessageDialog (null, "No existen productos relacionados con la búsqueda", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                
+                
+            }
+            
+            
         }
         catch(Exception e){
             System.err.println(e.getMessage());
@@ -260,9 +302,9 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listaClientes;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panelMenuCliente;
+    private javax.swing.JTable tablaClientes;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }
