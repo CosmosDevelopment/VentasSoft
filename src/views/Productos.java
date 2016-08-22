@@ -9,6 +9,7 @@ import entidades.Producto;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -187,13 +188,60 @@ this.repaint();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        Producto p= new Producto();
-        p.setNombreProducto(txtNombreProducto.getText());
-        p.setCantidadProducto(Integer.parseInt(txtCantidadProducto.getText()));
-        p.setPrecioProducto(Integer.parseInt(txtPrecioProducto.getText()));
-        
-      
+        try{
+            StringBuilder mensaje=new StringBuilder();
+            String titulo="Revise los siguientes datos:\n";
+            
+            Producto p= new Producto();
+            if(!txtNombreProducto.getText().isEmpty() && txtNombreProducto.getText()!=null){
+                p.setNombreProducto(txtNombreProducto.getText());
+            }
+            else {
+                mensaje.append("·el nombre.\n");
+                
+            }
+            if(txtCantidadProducto.getText().isEmpty() || txtCantidadProducto.getText()==null ){
+                mensaje.append("·la cantidad.\n");
+                
+            }
+            else if (!isNumeric(txtCantidadProducto.getText())){
+                mensaje.append("·la cantidad debe contener sólo números.\n");
+            }
+            else{
+                p.setCantidadProducto(Integer.parseInt(txtCantidadProducto.getText()));
+                
+            }
+            if(txtPrecioProducto.getText().isEmpty() || txtPrecioProducto.getText()==null){
+                mensaje.append("·el precio.\n ");
+            }
+            else if(!isNumeric(txtPrecioProducto.getText())){
+                mensaje.append("·el precio debe contener sólo números.\n");
+            }
+            else{
+                p.setPrecioProducto(Integer.parseInt(txtPrecioProducto.getText()));
+                
+            }
+            if(mensaje.length()!=0){                
+                mensaje.append("para guardar el producto.");
+                String mensajeAMostrar=titulo+mensaje;
+                JOptionPane.showMessageDialog (null, mensajeAMostrar, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            //TODO INGRESAR CON CTRL
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog (null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
+    
+    private static boolean isNumeric(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
+        }
+    }
     
     /**
      * @param args the command line arguments
