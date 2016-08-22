@@ -26,7 +26,6 @@ public class daoVenta {
        session.save(venta);
        session.flush();
        tx.commit();
-       session.close();
        return true;
     }
    
@@ -36,7 +35,6 @@ public class daoVenta {
         session.update(venta);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -46,7 +44,6 @@ public class daoVenta {
         session.delete(venta);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -57,7 +54,6 @@ public class daoVenta {
        ArrayList<Venta> venta = (ArrayList<Venta>) session.createQuery("From Venta").list();
        session.flush();
        tx.commit();
-       session.close();
        return venta;
    }
     
@@ -67,7 +63,6 @@ public class daoVenta {
        ArrayList<Venta> venta = (ArrayList<Venta>) session.createQuery("From Producto pro where pro.id_producto="+id_venta).list();
        session.flush();
        tx.commit();
-       session.close();
        return venta;
    }
 }

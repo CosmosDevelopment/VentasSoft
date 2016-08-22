@@ -26,7 +26,6 @@ public class daoAbono {
        session.save(abono);
        session.flush();
        tx.commit();
-       session.close();
        return true;
     }
    
@@ -36,7 +35,6 @@ public class daoAbono {
         session.update(abono);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -46,7 +44,6 @@ public class daoAbono {
         session.delete(abono);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -57,7 +54,6 @@ public class daoAbono {
        ArrayList<Abono> abono = (ArrayList<Abono>) session.createQuery("From Abono").list();
        session.flush();
        tx.commit();
-       session.close();
        return abono;
    }
     
@@ -67,7 +63,6 @@ public class daoAbono {
        ArrayList<Abono> abono = (ArrayList<Abono>) session.createQuery("From Abono abo where abo.id_abono="+id_abono).list();
        session.flush();
        tx.commit();
-       session.close();
        return abono;
    }
    

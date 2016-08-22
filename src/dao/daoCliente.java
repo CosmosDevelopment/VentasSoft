@@ -27,7 +27,6 @@ public class daoCliente {
         session.save(cli);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -37,7 +36,6 @@ public class daoCliente {
         session.update(cli);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -47,7 +45,6 @@ public class daoCliente {
         session.delete(cli);
         session.flush();
         tx.commit();
-        session.close();
         return true;
     }
     
@@ -58,7 +55,6 @@ public class daoCliente {
         ArrayList<Cliente> cli = (ArrayList<Cliente>) session.createQuery("From Cliente").list();
         session.flush();
         tx.commit();
-        session.close();
         return cli;
     }
     
@@ -68,7 +64,6 @@ public class daoCliente {
         ArrayList<Cliente> cli = (ArrayList<Cliente>) session.createQuery("From Cliente cli where cli.id_cliente="+id_cliente).list();
         session.flush();
         tx.commit();
-        session.close();
         return cli;
     }
     
@@ -86,7 +81,6 @@ public class daoCliente {
                 cli = (ArrayList<Cliente>) query.list();
                 session.flush();
                 tx.commit();
-                session.close();
                 return cli;
                 
             case 1:
@@ -96,7 +90,6 @@ public class daoCliente {
                 cli= (ArrayList<Cliente>) query.list();
                 session.flush();
                 tx.commit();
-                session.close();
                 return cli;
                 
             case 2:
@@ -105,7 +98,6 @@ public class daoCliente {
                 cli = (ArrayList<Cliente>) query.list();
                 session.flush();
                 tx.commit();
-                session.close();
                 return cli;
             case 3:
                 query= session.createQuery("From Cliente c where c.numeroCliente = :dato ");
@@ -113,7 +105,6 @@ public class daoCliente {
                 cli = (ArrayList<Cliente>) query.list();
                 session.flush();
                 tx.commit();
-                session.close();
                 return cli;
         }
         return cli;
