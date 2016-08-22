@@ -5,14 +5,15 @@
 */
 package views;
 
-import java.awt.Image;
-import javax.swing.*;
+import ctrl.CtrlCliente;
+import entidades.Cliente;
+import java.util.List;
 /**
  *
  * @author wasp
  */
 public class MenuCliente extends javax.swing.JFrame {
-    
+    CtrlCliente ctrlCliente= new CtrlCliente();
     /**
      * Creates new form SearchCliente
      */
@@ -22,12 +23,6 @@ public class MenuCliente extends javax.swing.JFrame {
         panelMenuCliente.setAlignmentX(CENTER_ALIGNMENT);
         panelMenuCliente.setAlignmentY(CENTER_ALIGNMENT);
         
-//        //set imagen btn add cliente
-//        ImageIcon addCliente = new ImageIcon("src/images/addUser.png");
-//        Icon iconoAdd= new ImageIcon(addCliente.getImage().getScaledInstance(botonAddCliente.getWidth(), botonAddCliente.getHeight(), Image.SCALE_DEFAULT));
-//        botonAddCliente.setIcon(iconoAdd);
-
-               
         
         this.repaint();
         listaClientes.removeAll();
@@ -51,13 +46,13 @@ public class MenuCliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbBuscarCliente = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
+        txtBusqueda = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaClientes = new javax.swing.JList<>();
         botonAddCliente = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnBuscarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,8 +96,13 @@ public class MenuCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
-        jButton1.setText("Buscar");
+        btnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        btnBuscarCliente.setText("Buscar");
+        btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelMenuClienteLayout = new javax.swing.GroupLayout(panelMenuCliente);
         panelMenuCliente.setLayout(panelMenuClienteLayout);
@@ -119,9 +119,9 @@ public class MenuCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
+                                .addComponent(btnBuscarCliente))
                             .addComponent(jScrollPane1)))
                     .addGroup(panelMenuClienteLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -145,8 +145,8 @@ public class MenuCliente extends javax.swing.JFrame {
                 .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCliente))
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -193,6 +193,28 @@ public class MenuCliente extends javax.swing.JFrame {
         Menu m=new Menu();
         m.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+        try{
+            List<Cliente> listaClientes;
+            if(cbBuscarCliente.getSelectedItem().toString().equals("RUT")){
+                listaClientes= ctrlCliente.findByBusqueda(0, txtBusqueda.getText());
+            }
+            else if (cbBuscarCliente.getSelectedItem().toString().equals("Nombre")){
+                listaClientes= ctrlCliente.findByBusqueda(1, txtBusqueda.getText());
+            }
+            else if (cbBuscarCliente.getSelectedItem().toString().equals("Apellido")){
+                listaClientes= ctrlCliente.findByBusqueda(2, txtBusqueda.getText());
+            }
+            else{
+                listaClientes=ctrlCliente.findByBusqueda(3, txtBusqueda.getText());
+            }
+            System.out.println(listaClientes.size());
+        }
+        catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnBuscarClienteActionPerformed
     
     /**
      * @param args the command line arguments
@@ -232,15 +254,15 @@ public class MenuCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAddCliente;
+    private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cbBuscarCliente;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JList<String> listaClientes;
     private javax.swing.JPanel panelMenuCliente;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }

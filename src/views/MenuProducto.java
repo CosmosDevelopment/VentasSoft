@@ -24,7 +24,7 @@ public class MenuProducto extends javax.swing.JFrame {
         initComponents();
         panelMenuCliente.setAlignmentX(CENTER_ALIGNMENT);
         panelMenuCliente.setAlignmentY(CENTER_ALIGNMENT);
-        listaProductos.setVisible(false);
+        
         this.repaint();
     }
     
@@ -95,11 +95,19 @@ public class MenuProducto extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        listaProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listaProductos);
         listaProductos.getAccessibleContext().setAccessibleParent(listaProductos);
 
@@ -191,15 +199,15 @@ public class MenuProducto extends javax.swing.JFrame {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         
         try {
-           
+            
             if(txtBusqueda.getText().isEmpty() || txtBusqueda.getText()== null){
                 JOptionPane.showMessageDialog (null, "Debe ingresar el nombre del producto", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 
             }
             else{
-                 DefaultTableModel modelo= (DefaultTableModel) listaProductos.getModel();
+                DefaultTableModel modelo= (DefaultTableModel) listaProductos.getModel();
                 ArrayList<Producto> productos=ctrlProducto.buscarPorNombre(txtBusqueda.getText());
-              
+                
                 if(productos.size()>0){
                     for(Producto p: productos){
                         String[] fila = new String[3];
@@ -207,9 +215,9 @@ public class MenuProducto extends javax.swing.JFrame {
                         fila[1] = p.getCantidadProducto().toString();
                         fila[2] = p.getPrecioProducto().toString();
                         
-                        modelo.addRow(fila); 
+                        modelo.addRow(fila);
                     }
-                     
+                    
                 }
                 else
                     JOptionPane.showMessageDialog (null, "No existen productos relacionados con la búsqueda", "Aviso", JOptionPane.INFORMATION_MESSAGE);

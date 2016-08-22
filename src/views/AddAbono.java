@@ -8,8 +8,6 @@ package views;
 import entidades.Abono;
 import entidades.Producto;
 import javax.swing.JOptionPane;
-import org.jdatepicker.impl.*;
-
 /**
  *
  * @author wasp
@@ -33,7 +31,6 @@ public class AddAbono extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDatePickerUtil1 = new org.jdatepicker.util.JDatePickerUtil();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -219,7 +216,6 @@ public class AddAbono extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private com.toedter.calendar.JDateChooser fechaAbono;
     private javax.swing.JButton jButton1;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
