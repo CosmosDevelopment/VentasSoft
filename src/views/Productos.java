@@ -5,6 +5,7 @@
 */
 package views;
 
+import ctrl.CtrlProducto;
 import entidades.Producto;
 import java.awt.Image;
 import javax.swing.Icon;
@@ -16,20 +17,17 @@ import javax.swing.JOptionPane;
  * @author wasp
  */
 public class Productos extends javax.swing.JFrame {
-    
+    CtrlProducto ctrlProducto= new CtrlProducto();
     /**
      * Creates new form AddCliente
      */
     public Productos() {
+        
         initComponents();
         
         
-//          //set imagen btn agregar
-//        ImageIcon agregar = new ImageIcon("src/images/guardar.png");
-//        Icon iconoAdd= new ImageIcon(agregar.getImage().getScaledInstance(btnAdd.getWidth(), btnAdd.getHeight(), Image.SCALE_DEFAULT));
-//        btnAdd.setIcon(iconoAdd);
-
-this.repaint();
+        
+        this.repaint();
     }
     
     /**
@@ -49,7 +47,7 @@ this.repaint();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtNombreProducto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtCantidadProducto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -80,8 +78,8 @@ this.repaint();
 
         jLabel4.setText("Nombre:");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        jButton1.setText("Editar Producto");
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
+        btnEditar.setText("Editar Producto");
 
         jLabel3.setText("Cantidad:");
 
@@ -103,7 +101,7 @@ this.repaint();
                     .addComponent(txtCantidadProducto)
                     .addComponent(txtPrecioProducto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnEditar)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -113,7 +111,7 @@ this.repaint();
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnEditar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCantidadProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,14 +219,19 @@ this.repaint();
                 p.setPrecioProducto(Integer.parseInt(txtPrecioProducto.getText()));
                 
             }
-            if(mensaje.length()!=0){                
+            if(mensaje.length()!=0){
                 mensaje.append("para guardar el producto.");
                 String mensajeAMostrar=titulo+mensaje;
                 JOptionPane.showMessageDialog (null, mensajeAMostrar, "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
-            
-            //TODO INGRESAR CON CTRL
-            
+            //se agrega el producto
+            ctrlProducto.agregarProducto(p);
+            JOptionPane.showMessageDialog (null, "El producto se ha registrado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
+           
+            //Se limpian las variables
+            txtNombreProducto.setText("");
+            txtCantidadProducto.setText("");
+            txtPrecioProducto.setText("");
         }catch(Exception e){
             JOptionPane.showMessageDialog (null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -287,8 +290,8 @@ this.repaint();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
