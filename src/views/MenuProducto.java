@@ -110,6 +110,11 @@ public class MenuProducto extends javax.swing.JFrame {
             }
         });
         listaProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaProductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaProductos);
         listaProductos.getAccessibleContext().setAccessibleParent(listaProductos);
 
@@ -237,6 +242,18 @@ public class MenuProducto extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
+
+    private void listaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaProductosMouseClicked
+        Producto producto = new Producto();
+        Productos viewProducto = new Productos();
+        viewProducto.txtNombreProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),0));
+        viewProducto.txtPrecioProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),1));
+        viewProducto.txtCantidadProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),2));
+        viewProducto.btnEditar.setVisible(true);
+        this.setVisible(false);
+        viewProducto.setVisible(true);
+        
+    }//GEN-LAST:event_listaProductosMouseClicked
     
     /**
      * @param args the command line arguments
