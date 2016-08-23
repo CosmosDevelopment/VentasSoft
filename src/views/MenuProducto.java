@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author wasp
@@ -25,6 +26,10 @@ public class MenuProducto extends javax.swing.JFrame {
         panelMenuCliente.setAlignmentX(CENTER_ALIGNMENT);
         panelMenuCliente.setAlignmentY(CENTER_ALIGNMENT);
         DefaultTableModel modelo= (DefaultTableModel) listaProductos.getModel();
+        TableColumn tableColumn = listaProductos.getColumn("ID");
+        tableColumn.setPreferredWidth(0); 
+        tableColumn.setMinWidth(0);
+        tableColumn.setMaxWidth(0);
         
         int filas= modelo.getRowCount();
         for(int i=1;i<=filas;i++){
@@ -91,14 +96,14 @@ public class MenuProducto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre Producto", "Precio Unitario", "Cantidad"
+                "ID", "Nombre Producto", "Precio Unitario", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -222,10 +227,11 @@ public class MenuProducto extends javax.swing.JFrame {
                 
                 if(productos.size()>0){
                     for(Producto p: productos){
-                        String[] fila = new String[3];
-                        fila[0] = p.getNombreProducto();
-                        fila[1] = p.getCantidadProducto().toString();
-                        fila[2] = p.getPrecioProducto().toString();
+                        String[] fila = new String[4];
+                        fila[0] = p.getIdProducto().toString();
+                        fila[1] = p.getNombreProducto();
+                        fila[2] = p.getCantidadProducto().toString();
+                        fila[3] = p.getPrecioProducto().toString();
                         
                         modelo.addRow(fila);
                     }
@@ -244,12 +250,17 @@ public class MenuProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void listaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaProductosMouseClicked
-        Producto producto = new Producto();
+       
         Productos viewProducto = new Productos();
-        viewProducto.txtNombreProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),0));
-        viewProducto.txtPrecioProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),1));
-        viewProducto.txtCantidadProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),2));
+        viewProducto.txtNombreProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),1));
+        viewProducto.txtPrecioProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),2));
+        viewProducto.txtCantidadProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),3));
+        viewProducto.txtID.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),0));
         viewProducto.btnEditar.setVisible(true);
+        viewProducto.txtNombreProducto.setEditable(false);
+        viewProducto.txtPrecioProducto.setEditable(false);
+        viewProducto.txtCantidadProducto.setEditable(false);
+       
         this.setVisible(false);
         viewProducto.setVisible(true);
         

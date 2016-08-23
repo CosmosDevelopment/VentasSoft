@@ -5,7 +5,10 @@
 */
 package views;
 
+import ctrl.CtrlAbono;
+import ctrl.CtrlCliente;
 import entidades.Abono;
+import entidades.Cliente;
 import entidades.Producto;
 import javax.swing.JOptionPane;
 /**
@@ -13,12 +16,12 @@ import javax.swing.JOptionPane;
  * @author wasp
  */
 public class AddAbono extends javax.swing.JFrame {
+    CtrlAbono ctrlAbono= new CtrlAbono();
+    CtrlCliente ctrlCliente = new CtrlCliente();
     
-    /**
-     * Creates new form addAbono
-     */
     public AddAbono() {
         initComponents();
+        txtIDCliente.setVisible(false);
         
     }
     
@@ -39,6 +42,7 @@ public class AddAbono extends javax.swing.JFrame {
         fechaAbono = new com.toedter.calendar.JDateChooser();
         btnGuardar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtIDCliente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,7 +93,8 @@ public class AddAbono extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIDCliente))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,7 +102,9 @@ public class AddAbono extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addGap(11, 11, 11)
+                .addComponent(txtIDCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(fechaAbono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,7 +112,7 @@ public class AddAbono extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(jButton1))
@@ -149,8 +156,14 @@ public class AddAbono extends javax.swing.JFrame {
             if(mensaje.length()!=0){
                 JOptionPane.showMessageDialog (null, mensaje, "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
-            else{ 
-                // ctrl
+            else{
+                Cliente cli= ctrlCliente.findByID(txtIDCliente.getText());
+                
+                ab.setCliente(cli);
+                ab.setFechaAbono(fechaAbono.getDate());
+                
+                ctrlAbono.agregarAbono(ab);
+                
                 JOptionPane.showMessageDialog (null, "El abono se ha registrado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
                 
                 //Se limpian las variables
@@ -220,6 +233,7 @@ public class AddAbono extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JLabel txtIDCliente;
     private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 }

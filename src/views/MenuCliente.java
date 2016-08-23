@@ -5,13 +5,17 @@
 */
 package views;
 
+import ctrl.CtrlAbono;
 import ctrl.CtrlCliente;
+import entidades.Abono;
 import entidades.Cliente;
-import entidades.Producto;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author wasp
@@ -33,11 +37,14 @@ public class MenuCliente extends javax.swing.JFrame {
         cbBuscarCliente.addItem("Apellido");
         cbBuscarCliente.addItem("Número Cliente");
         DefaultTableModel modelo= (DefaultTableModel) tablaClientes.getModel();
-                
-                int filas= modelo.getRowCount();
-                for(int i=1;i<=filas;i++){
-                    modelo.removeRow(0);
-                }
+        TableColumn tableColumn = tablaClientes.getColumn("ID");
+        tableColumn.setPreferredWidth(0);
+        tableColumn.setMinWidth(0);
+        tableColumn.setMaxWidth(0);
+        int filas= modelo.getRowCount();
+        for(int i=1;i<=filas;i++){
+            modelo.removeRow(0);
+        }
     }
     
     /**
@@ -103,21 +110,33 @@ public class MenuCliente extends javax.swing.JFrame {
 
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "N° Cliente", "Nombre ", "Apellido", "Rut", "Dirección", "Moroso"
+                "ID", "N° Cliente", "Nombre ", "Apellido", "Rut", "Dirección", "Moroso"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaClientesMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tablaClientes);
@@ -239,17 +258,18 @@ public class MenuCliente extends javax.swing.JFrame {
                 if(listaClientes.size()>0){
                     String moroso="";
                     for(Cliente c: listaClientes){
-                        String[] fila = new String[6];
-                        fila[0] = c.getNumeroCliente().toString();
-                        fila[1] = c.getNombreCliente();
-                        fila[2] = c.getApellidoCliente();
-                        fila[3] = c.getRutCliente();
-                        fila[4] = c.getDireccionCliente();
+                        String[] fila = new String[7];
+                        fila[0] = c.getIdCliente().toString();
+                        fila[1] = c.getNumeroCliente().toString();
+                        fila[2] = c.getNombreCliente();
+                        fila[3] = c.getApellidoCliente();
+                        fila[4] = c.getRutCliente();
+                        fila[5] = c.getDireccionCliente();
                         if(c.getMorosoCliente())
                             moroso="SI";
                         else
                             moroso="NO";
-                        fila[5] = moroso;
+                        fila[6] = moroso;
                         modelo.addRow(fila);
                     }
                     
@@ -266,6 +286,36 @@ public class MenuCliente extends javax.swing.JFrame {
             System.err.println(e.getMessage());
         }
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
+
+    private void tablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMouseClicked
+        try {
+            Cliente c= new Cliente();
+            Clientes viewCliente= new Clientes();
+            CtrlCliente ctrlCliente= new CtrlCliente();
+            CtrlAbono ctrlAbono= new CtrlAbono();
+            
+            c=ctrlCliente.findByID((String) tablaClientes.getValueAt(tablaClientes.getSelectedRow(),0));
+            viewCliente.txtID.setText(c.getIdCliente().toString());
+            viewCliente.txtNroCliente.setText(c.getNumeroCliente().toString());
+            viewCliente.txtNombre.setText(c.getNombreCliente());
+            viewCliente.txtApellido.setText(c.getApellidoCliente());
+            viewCliente.txtRut.setText(c.getRutCliente());
+            viewCliente.txtDireccion.setText(c.getDireccionCliente());
+            viewCliente.txtReferencia.setText(c.getReferenciaCliente());
+            viewCliente.txtTelefono.setText(c.getTelefonoCliente());
+            viewCliente.txtSaldo.setText(c.getTotalabonoCliente().toString());
+            viewCliente.txtTotalCompras.setText(c.getTotalcomprasCliente().toString());
+            
+            Abono abono= ctrlAbono.ultimoAbonoCliente(c.getIdCliente());
+            SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
+            viewCliente.fechaUAbono.setText(sdf.format(abono.getFechaAbono()));
+            viewCliente.montoUAbono.setText("$"+abono.getSaldoAbono().toString());
+            this.setVisible(false);
+            viewCliente.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tablaClientesMouseClicked
     
     /**
      * @param args the command line arguments

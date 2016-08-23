@@ -69,10 +69,23 @@ public class daoProducto {
         return pro;
     }
     
-    public ArrayList<Producto> getProductoById(int id_producto)throws Exception {
+      public Producto findByNombreExacto(String nombre)throws Exception {
         iniciaOperacion();
         Transaction tx = session.beginTransaction();
-        ArrayList<Producto> pro = (ArrayList<Producto>) session.createQuery("From Producto pro where pro.id_producto="+id_producto).list();
+        Query query= session.createQuery("From Producto p where p.nombreProducto =:nombre ");
+        query.setParameter("nombre",  nombre );
+        Producto pro = (Producto) query.uniqueResult();
+        session.flush();
+        tx.commit();
+        return pro;
+    }
+    
+    public Producto getProductoById(int idProducto)throws Exception {
+        iniciaOperacion();
+        Transaction tx = session.beginTransaction();
+        Query query=session.createQuery("From Producto pro where pro.idProducto =:idProducto");
+        query.setParameter("idProducto",  idProducto );
+        Producto pro = (Producto) query.uniqueResult();
         session.flush();
         tx.commit();
         return pro;

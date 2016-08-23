@@ -13,4 +13,11 @@ public class CtrlCliente {
     public ArrayList<Cliente>findByBusqueda(int busqueda,String dato) throws Exception{
         return dc.findByBusqueda(busqueda, dato);
     }
+    
+    public Cliente findByID(String id) throws Exception{
+        return dc.getClienteById(id);
+    }
+    public boolean actualizarCliente(Cliente cli) throws Exception{
+        return dc.updateCliente(cli);
+    }
 }

@@ -58,10 +58,12 @@ public class daoCliente {
         return cli;
     }
     
-    public ArrayList<Cliente> getClienteById(int id_cliente)throws Exception {
+    public Cliente getClienteById(String idCliente)throws Exception {
         iniciaOperacion();
         Transaction tx = session.beginTransaction();
-        ArrayList<Cliente> cli = (ArrayList<Cliente>) session.createQuery("From Cliente cli where cli.id_cliente="+id_cliente).list();
+        Query query= session.createQuery("From Cliente cli where cli.idCliente=:idCliente");
+        query.setParameter("idCliente",  Integer.parseInt(idCliente) );
+        Cliente cli = (Cliente) query.uniqueResult();
         session.flush();
         tx.commit();
         return cli;
