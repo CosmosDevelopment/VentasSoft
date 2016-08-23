@@ -85,7 +85,7 @@ public class daoCliente {
                 
             case 1:
                 
-                query = session.createQuery("From Cliente c where c.rutCliente like :dato ");
+                query = session.createQuery("From Cliente c where c.nombreCliente like :dato ");
                 query.setParameter("dato",  "%" + dato + "%");
                 cli= (ArrayList<Cliente>) query.list();
                 session.flush();
@@ -93,7 +93,7 @@ public class daoCliente {
                 return cli;
                 
             case 2:
-                query= session.createQuery("From Cliente c where c.nombreProducto like :nombre ");
+                query= session.createQuery("From Cliente c where c.apellidoCliente like :dato ");
                 query.setParameter("dato",  "%" + dato + "%");
                 cli = (ArrayList<Cliente>) query.list();
                 session.flush();

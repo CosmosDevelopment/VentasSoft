@@ -255,7 +255,7 @@ public class MenuCliente extends javax.swing.JFrame {
                     
                 }
                 else
-                    JOptionPane.showMessageDialog (null, "No existen productos relacionados con la búsqueda", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog (null, "No existen clientes relacionados con la búsqueda", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 
                 
             }

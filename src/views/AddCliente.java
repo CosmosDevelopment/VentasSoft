@@ -386,6 +386,7 @@ this.repaint();
             Cliente c= new Cliente();
             Set<Abono> setAbono = new HashSet<Abono>();
             Set<Venta> setVenta = new HashSet<Venta>();
+            
             if(txtNroCliente.getText().isEmpty() || txtNroCliente.getText()==null){
                 mensaje.append("·el número de cliente.\n");
             }
@@ -394,6 +395,20 @@ this.repaint();
             }
             else{
                 c.setNumeroCliente(Integer.parseInt(txtNroCliente.getText()));
+            }
+            
+            if(txtNombre.getText().isEmpty() || txtNombre.getText()==null){
+                mensaje.append("·el nombre del cliente.\n");
+            }
+            else{
+                c.setNombreCliente(txtNombre.getText());
+            }
+            
+            if(txtApellido.getText().isEmpty() || txtApellido.getText()==null){
+                mensaje.append("·el apellido del cliente.\n");
+            }
+            else{
+                c.setApellidoCliente(txtApellido.getText());
             }
             
             
@@ -429,9 +444,6 @@ this.repaint();
                 mensaje.append("·el teléfono del cliente.\n");
             }
             
-            //TODO borrar esto, esta de prueba            
-            c.setNombreCliente("Apellido");
-            c.setApellidoCliente("apellido");
             c.setAbonos(setAbono);
             c.setVentas(setVenta);
             c.setTotalabonoCliente(0);
