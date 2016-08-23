@@ -430,11 +430,10 @@ this.repaint();
             }
             
             //TODO borrar esto, esta de prueba            
-            c.setNombreCompletoCliente("nombre completo");
-            
+            c.setNombreCliente("Apellido");
+            c.setApellidoCliente("apellido");
             c.setAbonos(setAbono);
             c.setVentas(setVenta);
-            
             c.setTotalabonoCliente(0);
             c.setTotalcomprasCliente(0);
             c.setMorosoCliente(false);

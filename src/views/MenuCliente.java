@@ -22,7 +22,6 @@ public class MenuCliente extends javax.swing.JFrame {
      * Creates new form SearchCliente
      */
     public MenuCliente() {
-        
         initComponents();
         panelMenuCliente.setAlignmentX(CENTER_ALIGNMENT);
         panelMenuCliente.setAlignmentY(CENTER_ALIGNMENT);
@@ -232,8 +231,8 @@ public class MenuCliente extends javax.swing.JFrame {
                     for(Cliente c: listaClientes){
                         String[] fila = new String[6];
                         fila[0] = c.getNumeroCliente().toString();
-                        fila[1] = c.getNombreCompletoCliente();
-                        fila[2] = c.getNombreCompletoCliente();
+                        fila[1] = c.getNombreCliente();
+                        fila[2] = c.getApellidoCliente();
                         fila[3] = c.getRutCliente();
                         fila[4] = c.getDireccionCliente();
                         if(c.getMorosoCliente())

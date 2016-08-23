@@ -24,7 +24,7 @@ public class MenuProducto extends javax.swing.JFrame {
         initComponents();
         panelMenuCliente.setAlignmentX(CENTER_ALIGNMENT);
         panelMenuCliente.setAlignmentY(CENTER_ALIGNMENT);
-        
+        DefaultTableModel modelo = (DefaultTableModel) listaProductos.getModel();
         this.repaint();
     }
     
@@ -83,10 +83,7 @@ public class MenuProducto extends javax.swing.JFrame {
 
         listaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Nombre Producto", "Precio Unitario", "Cantidad"

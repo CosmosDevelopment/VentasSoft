@@ -1,5 +1,5 @@
 package entidades;
-// Generated 14-08-2016 0:15:48 by Hibernate Tools 4.3.1
+// Generated 22-08-2016 21:51:15 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,15 +15,17 @@ public class Producto  implements java.io.Serializable {
      private String nombreProducto;
      private Integer cantidadProducto;
      private Integer precioProducto;
+     private Boolean estadoProducto;
      private Set ventas = new HashSet(0);
 
     public Producto() {
     }
 
-    public Producto(String nombreProducto, Integer cantidadProducto, Integer precioProducto, Set ventas) {
+    public Producto(String nombreProducto, Integer cantidadProducto, Integer precioProducto, Boolean estadoProducto, Set ventas) {
        this.nombreProducto = nombreProducto;
        this.cantidadProducto = cantidadProducto;
        this.precioProducto = precioProducto;
+       this.estadoProducto = estadoProducto;
        this.ventas = ventas;
     }
    
@@ -54,6 +56,13 @@ public class Producto  implements java.io.Serializable {
     
     public void setPrecioProducto(Integer precioProducto) {
         this.precioProducto = precioProducto;
+    }
+    public Boolean getEstadoProducto() {
+        return this.estadoProducto;
+    }
+    
+    public void setEstadoProducto(Boolean estadoProducto) {
+        this.estadoProducto = estadoProducto;
     }
     public Set getVentas() {
         return this.ventas;

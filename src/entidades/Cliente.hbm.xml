@@ -1,15 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 14-08-2016 0:15:49 by Hibernate Tools 4.3.1 -->
+<!-- Generated 22-08-2016 21:51:16 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entidades.Cliente" table="cliente" catalog="softventas" optimistic-lock="version">
         <id name="idCliente" type="java.lang.Integer">
             <column name="id_cliente" />
             <generator class="identity" />
         </id>
-        <property name="nombreCompletoCliente" type="string">
-            <column name="nombre_completo_cliente" />
+        <property name="nombreCliente" type="string">
+            <column name="nombre_cliente" />
+        </property>
+        <property name="apellidoCliente" type="string">
+            <column name="apellido_cliente" />
         </property>
         <property name="rutCliente" type="string">
             <column name="rut_cliente" length="45" />
