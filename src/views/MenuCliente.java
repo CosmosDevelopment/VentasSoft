@@ -33,6 +33,12 @@ public class MenuCliente extends javax.swing.JFrame {
         cbBuscarCliente.addItem("Nombre");
         cbBuscarCliente.addItem("Apellido");
         cbBuscarCliente.addItem("Número Cliente");
+        DefaultTableModel modelo= (DefaultTableModel) tablaClientes.getModel();
+                
+                int filas= modelo.getRowCount();
+                for(int i=1;i<=filas;i++){
+                    modelo.removeRow(0);
+                }
     }
     
     /**
@@ -226,7 +232,11 @@ public class MenuCliente extends javax.swing.JFrame {
             else{
                 
                 DefaultTableModel modelo= (DefaultTableModel) tablaClientes.getModel();
-                System.out.println(listaClientes.size());
+                
+                int filas= modelo.getRowCount();
+                for(int i=1;i<=filas;i++){
+                    modelo.removeRow(0);
+                }
                 if(listaClientes.size()>0){
                     String moroso="";
                     for(Cliente c: listaClientes){

@@ -20,25 +20,25 @@ public class VentaSoft {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        try {
-              Properties props = new Properties();
-             props.put("logoString", "my company"); 
-            props.put("licenseKey", "INSERT YOUR LICENSE KEY HERE");
-            
-            // colores borde pantalla           
-            props.put("windowTitleColorLight", "14 45 208"); 
-            props.put("windowTitleColorDark", "14 45 198"); 
-            props.put("windowBorderColor", "27 174 42");
-           
-              props.put("windowBackgroundColor", "27 174 42");
-           
-            // set your theme
-            SmartLookAndFeel.setCurrentTheme(props);
-		UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
+//        
+//        try {
+//              Properties props = new Properties();
+//             props.put("logoString", "my company"); 
+//            props.put("licenseKey", "INSERT YOUR LICENSE KEY HERE");
+//            
+//            // colores borde pantalla           
+//            props.put("windowTitleColorLight", "14 45 208"); 
+//            props.put("windowTitleColorDark", "14 45 198"); 
+//            props.put("windowBorderColor", "27 174 42");
+//           
+//              props.put("windowBackgroundColor", "27 174 42");
+//           
+//            // set your theme
+//            SmartLookAndFeel.setCurrentTheme(props);
+//		UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+//	} catch (Exception e) {
+//		e.printStackTrace();
+//	}
         Login l = new Login();
         l.setVisible(true);
 

@@ -24,7 +24,12 @@ public class MenuProducto extends javax.swing.JFrame {
         initComponents();
         panelMenuCliente.setAlignmentX(CENTER_ALIGNMENT);
         panelMenuCliente.setAlignmentY(CENTER_ALIGNMENT);
+        DefaultTableModel modelo= (DefaultTableModel) listaProductos.getModel();
         
+        int filas= modelo.getRowCount();
+        for(int i=1;i<=filas;i++){
+            modelo.removeRow(0);
+        }
         this.repaint();
     }
     
@@ -206,6 +211,11 @@ public class MenuProducto extends javax.swing.JFrame {
             }
             else{
                 DefaultTableModel modelo= (DefaultTableModel) listaProductos.getModel();
+                
+                int filas= modelo.getRowCount();
+                for(int i=1;i<=filas;i++){
+                    modelo.removeRow(0);
+                }
                 ArrayList<Producto> productos=ctrlProducto.buscarPorNombre(txtBusqueda.getText());
                 
                 if(productos.size()>0){
