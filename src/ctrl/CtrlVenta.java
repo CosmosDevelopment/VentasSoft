@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ctrl;
 
-/**
- *
- * @author wasp
- */
+import dao.daoVenta;
+import entidades.Venta;
+
+
 public class CtrlVenta {
+    daoVenta dv= new daoVenta();
     
+    public void agregarVenta(Venta venta) throws Exception{
+        
+        dv.insertVenta(venta);
+    }
 }

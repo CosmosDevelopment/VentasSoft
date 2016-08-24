@@ -69,6 +69,17 @@ public class daoProducto {
         return pro;
     }
     
+     public ArrayList<Producto> findByNombreProductoAndActivos(String nombre)throws Exception {
+        iniciaOperacion();
+        Transaction tx = session.beginTransaction();
+        Query query= session.createQuery("From Producto p where p.nombreProducto like :nombre and p.estadoProducto=1");
+        query.setParameter("nombre",  "%" + nombre + "%");
+        ArrayList<Producto> pro = (ArrayList<Producto>) query.list();
+        session.flush();
+        tx.commit();
+        return pro;
+    }
+    
       public Producto findByNombreExacto(String nombre)throws Exception {
         iniciaOperacion();
         Transaction tx = session.beginTransaction();

@@ -40,6 +40,16 @@ public class Clientes extends javax.swing.JFrame {
         txtTelefono.setEditable(false);
         txtID.setVisible(false);
         btnActualizar.setVisible(false);
+        cbEstado.removeAllItems();
+        cbEstado.addItem("ACTIVO");
+        cbEstado.addItem("INACTIVO");
+        cbMoroso.removeAllItems();
+        cbMoroso.addItem("SI");
+        cbMoroso.addItem("NO");
+        
+        cbEstado.setEnabled(false);
+        cbMoroso.setEnabled(false);
+        
         
         DefaultTableModel modelo= (DefaultTableModel) tablaProductos.getModel();
         TableColumn tableColumn = tablaProductos.getColumn("ID");
@@ -73,7 +83,7 @@ public class Clientes extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
-        btnAddProducto1 = new javax.swing.JButton();
+        btnAddProducto = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         btnVerAboos = new javax.swing.JButton();
@@ -101,6 +111,10 @@ public class Clientes extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtReferencia = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        cbEstado = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        cbMoroso = new javax.swing.JComboBox<>();
         txtID = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
 
@@ -145,11 +159,11 @@ public class Clientes extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaProductos);
 
-        btnAddProducto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
-        btnAddProducto1.setText("Agregar");
-        btnAddProducto1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        btnAddProducto.setText("Agregar");
+        btnAddProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddProducto1ActionPerformed(evt);
+                btnAddProductoActionPerformed(evt);
             }
         });
 
@@ -162,7 +176,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(btnAddProducto1))
+                    .addComponent(btnAddProducto))
                 .addGap(0, 42, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -173,7 +187,7 @@ public class Clientes extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAddProducto1))
+                        .addComponent(btnAddProducto))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
@@ -296,6 +310,14 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setText("Estado:");
+
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel15.setText("Moroso:");
+
+        cbMoroso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -303,22 +325,6 @@ public class Clientes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(218, 218, 218)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
@@ -333,7 +339,31 @@ public class Clientes extends javax.swing.JFrame {
                                 .addGap(186, 186, 186)
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnActualizar)))))
+                                .addComponent(btnActualizar))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(82, 82, 82)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel14))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbMoroso, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
         );
         jPanel2Layout.setVerticalGroup(
@@ -341,7 +371,11 @@ public class Clientes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtNroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(cbMoroso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -376,7 +410,7 @@ public class Clientes extends javax.swing.JFrame {
         txtID.setText("jTextField1");
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        btnEditar.setText("Editar Cliente");
+        btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -536,6 +570,35 @@ public class Clientes extends javax.swing.JFrame {
             else{
                 mensaje.append("·el teléfono del cliente.\n");
             }
+            if(cbEstado.getSelectedItem().equals("ACTIVO")){
+                c.setActivoCliente(true);
+            }
+            else{
+                c.setActivoCliente(false);
+            }
+            if(cbMoroso.getSelectedItem().equals("SI")){
+                c.setMorosoCliente(true);
+            }
+            else{
+                c.setMorosoCliente(false);
+            }
+            if(cbEstado.getSelectedItem().equals("ACTIVO") && cbMoroso.getSelectedItem().equals("SI") ){
+                btnAddAbono.setEnabled(true);
+                btnAddProducto.setEnabled(false);
+            }
+            else if(cbEstado.getSelectedItem().equals("ACTIVO") && cbMoroso.getSelectedItem().equals("NO") ){
+                btnAddProducto.setEnabled(true);
+                btnAddAbono.setEnabled(true);
+            }
+            else if(cbEstado.getSelectedItem().equals("INACTIVO") ){
+                btnAddProducto.setEnabled(false);
+                btnAddAbono.setEnabled(false);
+            }
+            
+            
+            c.setMorosoCliente(rootPaneCheckingEnabled);
+            
+            
             ctrlCliente.actualizarCliente(c);
             JOptionPane.showMessageDialog (null, "El cliente se ha actualizado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
             
@@ -547,9 +610,12 @@ public class Clientes extends javax.swing.JFrame {
             txtReferencia.setEditable(false);
             txtTelefono.setEditable(false);
             txtID.setEditable(false);
+            cbEstado.setEnabled(false);
+            cbMoroso.setEnabled(false);
             
             btnActualizar.setVisible(false);
             btnEditar.setVisible(true);
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog (null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -566,6 +632,8 @@ public class Clientes extends javax.swing.JFrame {
         txtDireccion.setEditable(true);
         txtReferencia.setEditable(true);
         txtTelefono.setEditable(true);
+        cbEstado.setEnabled(true);
+        cbMoroso.setEnabled(true);
         
         btnEditar.setVisible(false);
         btnActualizar.setVisible(true);
@@ -573,45 +641,43 @@ public class Clientes extends javax.swing.JFrame {
 
     private void btnVerAboosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerAboosActionPerformed
         HistorialAbonos  ha= new HistorialAbonos();
-         DefaultTableModel modelo= (DefaultTableModel) ha.tablaAbonos.getModel();
+        DefaultTableModel modelo= (DefaultTableModel) ha.tablaAbonos.getModel();
         try {
             ArrayList<Abono> listaAbonos= ctrlAbono.listByCliente(txtID.getText());
             SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
-        
-         if(listaAbonos.size()>0){
-                    for(Abono a: listaAbonos){
-                        String[] fila = new String[3] ;
-                        fila[0] = sdf.format(a.getFechaAbono());
-                        fila[1] = a.getSaldoAbono().toString();
-                        fila[2] = a.getSaldoAbono().toString(); // TODO EDITAR
-                        
-                        
-                        modelo.addRow(fila);
-                    }
+            
+            if(listaAbonos.size()>0){
+                for(Abono a: listaAbonos){
+                    String[] fila = new String[3] ;
+                    fila[0] = sdf.format(a.getFechaAbono());
+                    fila[1] = a.getSaldoAbono().toString();
+                    fila[2] = a.getSaldoAbono().toString(); // TODO EDITAR
                     
+                    
+                    modelo.addRow(fila);
                 }
-        ha.tablaAbonos.setModel(modelo);
-        ha.setVisible(true);
+                
+            }
+            ha.tablaAbonos.setModel(modelo);
+            ha.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnVerAboosActionPerformed
 
-    private void btnAddProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProducto1ActionPerformed
-        try {
-            
-        } catch (Exception ex) {
-            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void btnAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductoActionPerformed
+        AddProducto viewProducto= new AddProducto();
+        viewProducto.txtIDCliente.setText(txtID.getText());
+        viewProducto.setVisible(true);
         
-    }//GEN-LAST:event_btnAddProducto1ActionPerformed
+    }//GEN-LAST:event_btnAddProductoActionPerformed
 
     private void btnAddAbonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAbonoActionPerformed
         AddAbono viewAbono= new AddAbono();
         
         viewAbono.txtIDCliente.setText(txtID.getText());
         
-        viewAbono.setVisible(true);// TODO add your handling code here:  // TODO add your handling code here
+        viewAbono.setVisible(true);
     }//GEN-LAST:event_btnAddAbonoActionPerformed
     private static boolean isNumeric(String cadena){
         try {
@@ -666,17 +732,21 @@ public class Clientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnAddAbono;
-    private javax.swing.JButton btnAddProducto1;
+    public javax.swing.JButton btnAddAbono;
+    public javax.swing.JButton btnAddProducto;
     public javax.swing.JButton btnEditar;
     private javax.swing.JButton btnVerAboos;
     private javax.swing.JButton btnVolver;
+    public javax.swing.JComboBox<String> cbEstado;
+    public javax.swing.JComboBox<String> cbMoroso;
     public javax.swing.JLabel fechaUAbono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -110,20 +110,20 @@ public class MenuCliente extends javax.swing.JFrame {
 
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "N° Cliente", "Nombre ", "Apellido", "Rut", "Dirección", "Moroso"
+                "ID", "N° Cliente", "Nombre ", "Apellido", "Rut", "Dirección", "Moroso", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -146,11 +146,6 @@ public class MenuCliente extends javax.swing.JFrame {
         panelMenuClienteLayout.setHorizontalGroup(
             panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuClienteLayout.createSequentialGroup()
-                .addGap(0, 98, Short.MAX_VALUE)
-                .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuClienteLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelMenuClienteLayout.createSequentialGroup()
@@ -169,6 +164,15 @@ public class MenuCliente extends javax.swing.JFrame {
                         .addComponent(btnVolver)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonAddCliente))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuClienteLayout.createSequentialGroup()
+                .addGap(0, 52, Short.MAX_VALUE)
+                .addGroup(panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuClienteLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(673, 673, 673))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuClienteLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))))
         );
         panelMenuClienteLayout.setVerticalGroup(
             panelMenuClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,8 +261,9 @@ public class MenuCliente extends javax.swing.JFrame {
                 }
                 if(listaClientes.size()>0){
                     String moroso="";
+                    String estado="";
                     for(Cliente c: listaClientes){
-                        String[] fila = new String[7];
+                        String[] fila = new String[8];
                         fila[0] = c.getIdCliente().toString();
                         fila[1] = c.getNumeroCliente().toString();
                         fila[2] = c.getNombreCliente();
@@ -269,7 +274,12 @@ public class MenuCliente extends javax.swing.JFrame {
                             moroso="SI";
                         else
                             moroso="NO";
+                        if(c.getActivoCliente())
+                            estado="ACTIVO";
+                        else
+                            estado="INACTIVO";
                         fila[6] = moroso;
+                        fila[7]=estado;
                         modelo.addRow(fila);
                     }
                     
@@ -306,10 +316,31 @@ public class MenuCliente extends javax.swing.JFrame {
             viewCliente.txtSaldo.setText(c.getTotalabonoCliente().toString());
             viewCliente.txtTotalCompras.setText(c.getTotalcomprasCliente().toString());
             
+            
+            if(c.getActivoCliente()){
+                viewCliente.cbEstado.setSelectedItem("ACTIVO");
+            }
+            else{
+                viewCliente.cbEstado.setSelectedItem("INACTIVO");
+                viewCliente.btnAddProducto.setEnabled(false);
+                 viewCliente.btnAddAbono.setEnabled(false);
+            }
+            
+            if(c.getMorosoCliente()){
+                viewCliente.cbMoroso.setSelectedItem("SI");
+                 viewCliente.btnAddProducto.setEnabled(false);
+            }
+            else{
+                viewCliente.cbMoroso.setSelectedItem("NO");
+            }
+            
+            
             Abono abono= ctrlAbono.ultimoAbonoCliente(c.getIdCliente());
-            SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
-            viewCliente.fechaUAbono.setText(sdf.format(abono.getFechaAbono()));
-            viewCliente.montoUAbono.setText("$"+abono.getSaldoAbono().toString());
+             if(abono!=null){
+                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
+                viewCliente.fechaUAbono.setText(sdf.format(abono.getFechaAbono()));
+                viewCliente.montoUAbono.setText("$"+abono.getSaldoAbono().toString());
+            }
             this.setVisible(false);
             viewCliente.setVisible(true);
         } catch (Exception ex) {

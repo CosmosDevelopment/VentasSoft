@@ -22,9 +22,10 @@ public class CtrlProducto {
     public ArrayList<Producto>  buscarPorNombre(String nombre ) throws Exception{
         return dp.findByNombreProducto(nombre);
     }
-    public Producto  buscarPorNombreExacto(String nombre ) throws Exception{
-        return dp.findByNombreExacto(nombre);
+    public ArrayList<Producto>  buscarPorNombreActivos(String nombre ) throws Exception{
+        return dp.findByNombreProductoAndActivos(nombre);
     }
+    
      public Producto  buscarPorID(int id ) throws Exception{
         return dp.getProductoById(id);
     }

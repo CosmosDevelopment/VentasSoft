@@ -24,9 +24,14 @@ public class CtrlAbono {
     public ArrayList<Abono> listByCliente (String idCliente) throws Exception{
         return da.getAbonoByIdCliente(Integer.parseInt(idCliente));
     }
-      public Abono ultimoAbonoCliente (int idCliente) throws Exception{
-         ArrayList<Abono> abonos=da.getAbonoByIdCliente(idCliente);
-        return abonos.get(abonos.size()-1);
-         
+    public Abono ultimoAbonoCliente (int idCliente) throws Exception{
+        ArrayList<Abono> abonos=da.getAbonoByIdCliente(idCliente);
+        if(abonos.size()>0){
+            return abonos.get(abonos.size()-1);
+        }
+        else{
+            return null;
+        }
+        
     }
 }

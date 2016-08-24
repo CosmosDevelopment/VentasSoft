@@ -23,6 +23,11 @@ public class Productos extends javax.swing.JFrame {
      */
     public Productos() {
         initComponents();
+        cbEstado.removeAllItems();
+        cbEstado.addItem("ACTIVO");
+        cbEstado.addItem("INACTIVO");
+        cbEstado.setVisible(false);
+        lblEstado.setVisible(false);
         btnEditar.setVisible(false);
         txtID.setVisible(false);
     }
@@ -50,6 +55,8 @@ public class Productos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtPrecioProducto = new javax.swing.JTextField();
         txtID = new javax.swing.JTextField();
+        lblEstado = new javax.swing.JLabel();
+        cbEstado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +90,7 @@ public class Productos extends javax.swing.JFrame {
         });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        btnEditar.setText("Editar Producto");
+        btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -95,6 +102,15 @@ public class Productos extends javax.swing.JFrame {
         jLabel5.setText("Precio:");
 
         txtID.setText("jTextField1");
+
+        lblEstado.setText("Estado:");
+
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEstadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,9 +132,13 @@ public class Productos extends javax.swing.JFrame {
                             .addComponent(txtNombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                             .addComponent(txtPrecioProducto))
                         .addGap(34, 34, 34)
-                        .addComponent(jLabel3)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(lblEstado))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCantidadProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCantidadProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(cbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 108, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -131,9 +151,12 @@ public class Productos extends javax.swing.JFrame {
                     .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txtCantidadProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPrecioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPrecioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblEstado)
+                        .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -192,7 +215,7 @@ public class Productos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
 
         pack();
@@ -250,13 +273,19 @@ public class Productos extends javax.swing.JFrame {
             }
             else{
                 Producto p1= ctrlProducto.buscarPorID(Integer.parseInt(txtID.getText()));
+                
                 p1.setNombreProducto(p.getNombreProducto());
                 p1.setCantidadProducto(p.getCantidadProducto());
                 p1.setPrecioProducto(p.getPrecioProducto());
-                
-                // p1.setEstadoProducto(rootPaneCheckingEnabled);
-                
+                if(cbEstado.getSelectedItem().equals("ACTIVO")){
+                    p1.setEstadoProducto(true);
+                }
+                else{
+                    p1.setEstadoProducto(false);
+                }
+                                
                 ctrlProducto.actualizarProducto(p1);
+                
                 JOptionPane.showMessageDialog (null, "El producto se ha actualizado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
                 
             }
@@ -264,6 +293,8 @@ public class Productos extends javax.swing.JFrame {
             txtNombreProducto.setText("");
             txtCantidadProducto.setText("");
             txtPrecioProducto.setText("");
+            cbEstado.setSelectedItem(null);
+            
         }catch(Exception e){
             JOptionPane.showMessageDialog (null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -273,6 +304,7 @@ public class Productos extends javax.swing.JFrame {
         txtNombreProducto.setEditable(true);
         txtCantidadProducto.setEditable(true);
         txtPrecioProducto.setEditable(true);
+        cbEstado.setEnabled(true);
         btnAdd.setText("Actualizar");
         btnEditar.setVisible(false);
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -280,6 +312,10 @@ public class Productos extends javax.swing.JFrame {
     private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreProductoActionPerformed
+
+    private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEstadoActionPerformed
     
     private static boolean isNumeric(String cadena){
         try {
@@ -336,6 +372,7 @@ public class Productos extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     public javax.swing.JButton btnEditar;
     private javax.swing.JButton btnVolver;
+    public javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -343,6 +380,7 @@ public class Productos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    public javax.swing.JLabel lblEstado;
     public javax.swing.JTextField txtCantidadProducto;
     public javax.swing.JTextField txtID;
     public javax.swing.JTextField txtNombreProducto;
