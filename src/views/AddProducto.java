@@ -262,33 +262,48 @@ public class AddProducto extends javax.swing.JFrame {
             Producto p= new Producto();
             Venta venta= new Venta();
             Cliente c= new Cliente();
+            
             CtrlVenta ctrlVenta = new CtrlVenta();
             CtrlCliente ctrlCliente= new CtrlCliente();
+            CtrlProducto ctrlProducto= new CtrlProducto();
             
             if(tableProducto.getSelectedColumn()>0){
                 
                 p=ctrlProducto.buscarPorID(Integer.parseInt((String) tableProducto.getValueAt(tableProducto.getSelectedRow(),0)));
-                venta.setProducto(p);
+                int cantidadStock= p.getCantidadProducto()-Integer.parseInt(txtCantidad.getText());
+                
+                if(cantidadStock>=0){
+                    venta.setProducto(p);
+                    c= ctrlCliente.findByID(txtIDCliente.getText());
+                    venta.setCliente(c);
+                    
+                    venta.setFechaVenta(txtFecha.getDate());
+                    venta.setMontoVenta(Integer.parseInt(txtTotal.getText()));
+                    
+                    if(!txtCantidad.getText().isEmpty() && isNumeric(txtCantidad.getText())){
+                        venta.setCantidadVenta(Integer.parseInt(txtCantidad.getText()));
+                    }
+                    else{
+                        JOptionPane.showMessageDialog (null, "Sólo debe ingresar números para la cantidad de productos", "Aviso", JOptionPane.DEFAULT_OPTION);
+                        
+                    }
+                    ctrlVenta.agregarVenta(venta);
+                    
+                    p.setCantidadProducto(p.getCantidadProducto()-venta.getCantidadVenta());
+                    
+                    ctrlProducto.actualizarProducto(p);
+                    JOptionPane.showMessageDialog (null, "El producto se ha agregado a la lista exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
+                    
+                    this.dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog (null, "No hay Stock suficiente para esta compra, modifique la cantidad a comprar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
             else{
                 JOptionPane.showMessageDialog (null, "Debe seleccinar un producto de la lista", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
-            c= ctrlCliente.findByID(txtIDCliente.getText());
-            venta.setCliente(c);
-            venta.setFechaVenta(txtFecha.getDate());
-            venta.setMontoVenta(Integer.parseInt(txtTotal.getText()));
             
-            if(!txtCantidad.getText().isEmpty() && isNumeric(txtCantidad.getText())){
-                venta.setCantidadVenta(Integer.parseInt(txtCantidad.getText()));
-            }
-            else{
-                JOptionPane.showMessageDialog (null, "Sólo debe ingresar números para la cantidad de productos", "Aviso", JOptionPane.DEFAULT_OPTION);
-            
-            }
-            ctrlVenta.agregarVenta(venta);
-            JOptionPane.showMessageDialog (null, "El producto se ha agregado a la lista exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
-            
-            this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(AddProducto.class.getName()).log(Level.SEVERE, null, ex);
         }

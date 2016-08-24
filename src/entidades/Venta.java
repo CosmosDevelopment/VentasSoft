@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24-08-2016 0:50:32 by Hibernate Tools 4.3.1
+// Generated 24-08-2016 03:13:47 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Date;
 public class Venta  implements java.io.Serializable {
 
 
-     private VentaId id;
+     private Integer idVenta;
      private Cliente cliente;
      private Producto producto;
      private Integer montoVenta;
@@ -21,13 +21,11 @@ public class Venta  implements java.io.Serializable {
     }
 
 	
-    public Venta(VentaId id, Cliente cliente, Producto producto) {
-        this.id = id;
+    public Venta(Cliente cliente, Producto producto) {
         this.cliente = cliente;
         this.producto = producto;
     }
-    public Venta(VentaId id, Cliente cliente, Producto producto, Integer montoVenta, Date fechaVenta, Integer cantidadVenta) {
-       this.id = id;
+    public Venta(Cliente cliente, Producto producto, Integer montoVenta, Date fechaVenta, Integer cantidadVenta) {
        this.cliente = cliente;
        this.producto = producto;
        this.montoVenta = montoVenta;
@@ -35,12 +33,12 @@ public class Venta  implements java.io.Serializable {
        this.cantidadVenta = cantidadVenta;
     }
    
-    public VentaId getId() {
-        return this.id;
+    public Integer getIdVenta() {
+        return this.idVenta;
     }
     
-    public void setId(VentaId id) {
-        this.id = id;
+    public void setIdVenta(Integer idVenta) {
+        this.idVenta = idVenta;
     }
     public Cliente getCliente() {
         return this.cliente;

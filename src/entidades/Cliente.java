@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24-08-2016 0:50:32 by Hibernate Tools 4.3.1
+// Generated 24-08-2016 03:13:47 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -23,13 +23,13 @@ public class Cliente  implements java.io.Serializable {
      private Integer totalcomprasCliente;
      private Integer totalabonoCliente;
      private Integer numeroCliente;
-     private Set abonos = new HashSet(0);
      private Set ventas = new HashSet(0);
+     private Set abonos = new HashSet(0);
 
     public Cliente() {
     }
 
-    public Cliente(String nombreCliente, String apellidoCliente, String rutCliente, String telefonoCliente, String direccionCliente, String referenciaCliente, Boolean morosoCliente, Boolean activoCliente, Integer totalcomprasCliente, Integer totalabonoCliente, Integer numeroCliente, Set abonos, Set ventas) {
+    public Cliente(String nombreCliente, String apellidoCliente, String rutCliente, String telefonoCliente, String direccionCliente, String referenciaCliente, Boolean morosoCliente, Boolean activoCliente, Integer totalcomprasCliente, Integer totalabonoCliente, Integer numeroCliente, Set ventas, Set abonos) {
        this.nombreCliente = nombreCliente;
        this.apellidoCliente = apellidoCliente;
        this.rutCliente = rutCliente;
@@ -41,8 +41,8 @@ public class Cliente  implements java.io.Serializable {
        this.totalcomprasCliente = totalcomprasCliente;
        this.totalabonoCliente = totalabonoCliente;
        this.numeroCliente = numeroCliente;
-       this.abonos = abonos;
        this.ventas = ventas;
+       this.abonos = abonos;
     }
    
     public Integer getIdCliente() {
@@ -129,19 +129,19 @@ public class Cliente  implements java.io.Serializable {
     public void setNumeroCliente(Integer numeroCliente) {
         this.numeroCliente = numeroCliente;
     }
-    public Set getAbonos() {
-        return this.abonos;
-    }
-    
-    public void setAbonos(Set abonos) {
-        this.abonos = abonos;
-    }
     public Set getVentas() {
         return this.ventas;
     }
     
     public void setVentas(Set ventas) {
         this.ventas = ventas;
+    }
+    public Set getAbonos() {
+        return this.abonos;
+    }
+    
+    public void setAbonos(Set abonos) {
+        this.abonos = abonos;
     }
 
 

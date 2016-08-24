@@ -1,22 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24-08-2016 0:50:34 by Hibernate Tools 4.3.1 -->
+<!-- Generated 24-08-2016 03:13:48 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entidades.Venta" table="venta" catalog="softventas" optimistic-lock="version">
-        <composite-id name="id" class="entidades.VentaId">
-            <key-property name="idCliente" type="int">
-                <column name="id_cliente" />
-            </key-property>
-            <key-property name="idProducto" type="int">
-                <column name="id_producto" />
-            </key-property>
-        </composite-id>
-        <many-to-one name="cliente" class="entidades.Cliente" update="false" insert="false" fetch="select">
-            <column name="id_cliente" not-null="true" />
+        <id name="idVenta" type="java.lang.Integer">
+            <column name="idVenta" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="entidades.Cliente" fetch="select">
+            <column name="cliente_id_cliente" not-null="true" />
         </many-to-one>
-        <many-to-one name="producto" class="entidades.Producto" update="false" insert="false" fetch="select">
-            <column name="id_producto" not-null="true" />
+        <many-to-one name="producto" class="entidades.Producto" fetch="select">
+            <column name="producto_id_producto" not-null="true" />
         </many-to-one>
         <property name="montoVenta" type="java.lang.Integer">
             <column name="monto_venta" />
