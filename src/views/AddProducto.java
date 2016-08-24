@@ -5,6 +5,7 @@
 */
 package views;
 
+import ctrl.CtrlCliente;
 import ctrl.CtrlProducto;
 import ctrl.CtrlVenta;
 import entidades.Cliente;
@@ -129,6 +130,11 @@ public class AddProducto extends javax.swing.JFrame {
 
         txtIDCliente.setText("jLabel2");
 
+        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadActionPerformed(evt);
+            }
+        });
         txtCantidad.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtCantidadFocusLost(evt);
@@ -257,21 +263,29 @@ public class AddProducto extends javax.swing.JFrame {
             Venta venta= new Venta();
             Cliente c= new Cliente();
             CtrlVenta ctrlVenta = new CtrlVenta();
+            CtrlCliente ctrlCliente= new CtrlCliente();
+            
             if(tableProducto.getSelectedColumn()>0){
-                p.setIdProducto(Integer.parseInt((String) tableProducto.getValueAt(tableProducto.getSelectedRow(),0)));
-                System.out.println(p.getIdProducto());
+                
+                p=ctrlProducto.buscarPorID(Integer.parseInt((String) tableProducto.getValueAt(tableProducto.getSelectedRow(),0)));
                 venta.setProducto(p);
             }
             else{
                 JOptionPane.showMessageDialog (null, "Debe seleccinar un producto de la lista", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
-            c.setIdCliente(Integer.parseInt(txtIDCliente.getText()));
+            c= ctrlCliente.findByID(txtIDCliente.getText());
             venta.setCliente(c);
             
             venta.setFechaVenta(txtFecha.getDate());
             venta.setMontoVenta(Integer.parseInt(txtTotal.getText()));
-            venta.setCantidadVenta(Integer.parseInt(txtCantidad.getText()));
             
+            if(!txtCantidad.getText().isEmpty() && isNumeric(txtCantidad.getText())){
+                venta.setCantidadVenta(Integer.parseInt(txtCantidad.getText()));
+            }
+            else{
+                JOptionPane.showMessageDialog (null, "Sólo debe ingresar números para la cantidad de productos", "Aviso", JOptionPane.DEFAULT_OPTION);
+            
+            }
             ctrlVenta.agregarVenta(venta);
             JOptionPane.showMessageDialog (null, "El producto se ha agregado a la lista exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
             
@@ -280,7 +294,6 @@ public class AddProducto extends javax.swing.JFrame {
             Logger.getLogger(AddProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -340,7 +353,7 @@ public class AddProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_tableProductoMousePressed
 
     private void txtCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyReleased
-        if(!txtCantidad.getText().isEmpty()){
+        if(!txtCantidad.getText().isEmpty() && isNumeric(txtCantidad.getText())){
             int cantidad=Integer.parseInt(txtCantidad.getText());
             int precio= Integer.parseInt((String) tableProducto.getValueAt(tableProducto.getSelectedRow(),3));
             Integer monto= cantidad* precio;
@@ -352,10 +365,21 @@ public class AddProducto extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_txtCantidadKeyReleased
-
+    private static boolean isNumeric(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
+        }
+    }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
     
     /**
      * @param args the command line arguments
