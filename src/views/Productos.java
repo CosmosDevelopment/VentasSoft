@@ -272,15 +272,14 @@ public class Productos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog (null, mensajeAMostrar, "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
             //se agrega el producto
-            System.out.println(btnAdd.getText());
             
             if(btnAdd.getText().equals("Guardar")){
-                System.out.println("entre al if");
+                
                 ctrlProducto.agregarProducto(p);
                 JOptionPane.showMessageDialog (null, "El producto se ha registrado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
             }
             else{
-                 System.out.println("entre al else");
+                
                 Producto p1= ctrlProducto.buscarPorID(Integer.parseInt(txtID.getText()));
                 
                 p1.setNombreProducto(p.getNombreProducto());
