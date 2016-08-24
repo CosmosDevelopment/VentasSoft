@@ -275,7 +275,6 @@ public class AddProducto extends javax.swing.JFrame {
             }
             c= ctrlCliente.findByID(txtIDCliente.getText());
             venta.setCliente(c);
-            
             venta.setFechaVenta(txtFecha.getDate());
             venta.setMontoVenta(Integer.parseInt(txtTotal.getText()));
             

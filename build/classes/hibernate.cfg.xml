@@ -7,6 +7,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/softventas?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">gabomat</property>
+    <mapping resource="entidades/Usuario.hbm.xml"/>
     <mapping resource="entidades/Cliente.hbm.xml"/>
     <mapping resource="entidades/Venta.hbm.xml"/>
     <mapping resource="entidades/Producto.hbm.xml"/>
