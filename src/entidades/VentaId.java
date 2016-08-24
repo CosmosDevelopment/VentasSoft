@@ -1,5 +1,5 @@
 package entidades;
-// Generated 22-08-2016 21:51:15 by Hibernate Tools 4.3.1
+// Generated 23-08-2016 22:12:21 by Hibernate Tools 4.3.1
 
 
 
@@ -9,17 +9,26 @@ package entidades;
 public class VentaId  implements java.io.Serializable {
 
 
+     private int idVenta;
      private int idCliente;
      private int idProducto;
 
     public VentaId() {
     }
 
-    public VentaId(int idCliente, int idProducto) {
+    public VentaId(int idVenta, int idCliente, int idProducto) {
+       this.idVenta = idVenta;
        this.idCliente = idCliente;
        this.idProducto = idProducto;
     }
    
+    public int getIdVenta() {
+        return this.idVenta;
+    }
+    
+    public void setIdVenta(int idVenta) {
+        this.idVenta = idVenta;
+    }
     public int getIdCliente() {
         return this.idCliente;
     }
@@ -42,13 +51,15 @@ public class VentaId  implements java.io.Serializable {
 		 if ( !(other instanceof VentaId) ) return false;
 		 VentaId castOther = ( VentaId ) other; 
          
-		 return (this.getIdCliente()==castOther.getIdCliente())
+		 return (this.getIdVenta()==castOther.getIdVenta())
+ && (this.getIdCliente()==castOther.getIdCliente())
  && (this.getIdProducto()==castOther.getIdProducto());
    }
    
    public int hashCode() {
          int result = 17;
          
+         result = 37 * result + this.getIdVenta();
          result = 37 * result + this.getIdCliente();
          result = 37 * result + this.getIdProducto();
          return result;

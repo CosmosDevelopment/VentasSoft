@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 22-08-2016 21:51:16 by Hibernate Tools 4.3.1 -->
+<!-- Generated 23-08-2016 22:12:22 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entidades.Abono" table="abono" catalog="softventas" optimistic-lock="version">
-        <id name="idAbono" type="int">
+        <id name="idAbono" type="java.lang.Integer">
             <column name="id_abono" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="cliente" class="entidades.Cliente" fetch="select">
             <column name="id_cliente" not-null="true" />
@@ -16,6 +16,9 @@
         </property>
         <property name="saldoAbono" type="java.lang.Integer">
             <column name="saldo_abono" />
+        </property>
+        <property name="montoAbono" type="java.lang.Integer">
+            <column name="monto_abono" />
         </property>
     </class>
 </hibernate-mapping>
