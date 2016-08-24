@@ -24,13 +24,20 @@ import javax.swing.table.TableColumn;
  */
 public class AddProducto extends javax.swing.JFrame {
     
-    /**
-     * Creates new form addAbono
-     */
+    //instancia ctrls y views
     CtrlProducto ctrlProducto= new CtrlProducto();
-    public AddProducto() {
+    public Clientes clientes;
+    public AddCliente addCliente;
+    
+    public AddProducto(Clientes viewClientes) {
+        clientes=viewClientes;
         initComponents();
+        
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
         txtIDCliente.setVisible(false);
+        
         DefaultTableModel modelo= (DefaultTableModel) tableProducto.getModel();
         TableColumn tableColumn = tableProducto.getColumn("ID");
         tableColumn.setPreferredWidth(0);
@@ -44,7 +51,28 @@ public class AddProducto extends javax.swing.JFrame {
         txtFecha.setEnabled(false);
         txtCantidad.setEditable(false);
     }
-    
+    public AddProducto(AddCliente addCliente) {
+        this.addCliente=addCliente;
+        initComponents();
+        
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
+        txtIDCliente.setVisible(false);
+        
+        DefaultTableModel modelo= (DefaultTableModel) tableProducto.getModel();
+        TableColumn tableColumn = tableProducto.getColumn("ID");
+        tableColumn.setPreferredWidth(0);
+        tableColumn.setMinWidth(0);
+        tableColumn.setMaxWidth(0);
+        txtTotal.setText("0");
+        int filas= modelo.getRowCount();
+        for(int i=1;i<=filas;i++){
+            modelo.removeRow(0);
+        }
+        txtFecha.setEnabled(false);
+        txtCantidad.setEditable(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -158,7 +186,7 @@ public class AddProducto extends javax.swing.JFrame {
 
         jLabel2.setText("Cantidad:");
 
-        jLabel4.setText("Total:");
+        jLabel4.setText("Total: $");
 
         jLabel5.setText("Fecha:");
 
@@ -271,9 +299,11 @@ public class AddProducto extends javax.swing.JFrame {
                 
                 p=ctrlProducto.buscarPorID(Integer.parseInt((String) tableProducto.getValueAt(tableProducto.getSelectedRow(),0)));
                 int cantidadStock= p.getCantidadProducto()-Integer.parseInt(txtCantidad.getText());
+                int totalCompras=0;
                 
                 if(cantidadStock>=0){
                     venta.setProducto(p);
+                    
                     c= ctrlCliente.findByID(txtIDCliente.getText());
                     venta.setCliente(c);
                     
@@ -287,13 +317,25 @@ public class AddProducto extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog (null, "Sólo debe ingresar números para la cantidad de productos", "Aviso", JOptionPane.DEFAULT_OPTION);
                         
                     }
+                    
                     ctrlVenta.agregarVenta(venta);
                     
                     p.setCantidadProducto(p.getCantidadProducto()-venta.getCantidadVenta());
-                    
                     ctrlProducto.actualizarProducto(p);
+                    
+                    totalCompras=c.getTotalcomprasCliente()+venta.getMontoVenta();
+                    
+                    c.setTotalcomprasCliente(totalCompras);
+                    
+                    ctrlCliente.actualizarCliente(c);
                     JOptionPane.showMessageDialog (null, "El producto se ha agregado a la lista exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
                     
+                    clientes.txtTotalCompras.setText("$"+c.getTotalcomprasCliente().toString());
+                    
+                    DefaultTableModel model = (DefaultTableModel) clientes.tablaProductos.getModel();
+                    model.addRow(new Object[]{p.getIdProducto().toString(),p.getNombreProducto(),venta.getCantidadVenta() ,p.getPrecioProducto(),venta.getMontoVenta()});
+                    
+                    clientes.tablaProductos.setModel(model);
                     this.dispose();
                 }
                 else{
@@ -395,43 +437,7 @@ public class AddProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadActionPerformed
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-        */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddProducto().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

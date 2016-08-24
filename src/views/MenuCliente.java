@@ -7,9 +7,14 @@ package views;
 
 import ctrl.CtrlAbono;
 import ctrl.CtrlCliente;
+import ctrl.CtrlProducto;
+import ctrl.CtrlVenta;
 import entidades.Abono;
 import entidades.Cliente;
+import entidades.Producto;
+import entidades.Venta;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,8 +32,8 @@ public class MenuCliente extends javax.swing.JFrame {
      */
     public MenuCliente() {
         initComponents();
-        panelMenuCliente.setAlignmentX(CENTER_ALIGNMENT);
-        panelMenuCliente.setAlignmentY(CENTER_ALIGNMENT);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         
         this.repaint();
         cbBuscarCliente.removeAllItems();
@@ -303,8 +308,11 @@ public class MenuCliente extends javax.swing.JFrame {
             Clientes viewCliente= new Clientes();
             CtrlCliente ctrlCliente= new CtrlCliente();
             CtrlAbono ctrlAbono= new CtrlAbono();
+            CtrlProducto ctrlProducto= new CtrlProducto();
+            CtrlVenta ctrlVenta = new CtrlVenta();
             
             c=ctrlCliente.findByID((String) tablaClientes.getValueAt(tablaClientes.getSelectedRow(),0));
+            
             viewCliente.txtID.setText(c.getIdCliente().toString());
             viewCliente.txtNroCliente.setText(c.getNumeroCliente().toString());
             viewCliente.txtNombre.setText(c.getNombreCliente());
@@ -314,8 +322,24 @@ public class MenuCliente extends javax.swing.JFrame {
             viewCliente.txtReferencia.setText(c.getReferenciaCliente());
             viewCliente.txtTelefono.setText(c.getTelefonoCliente());
             viewCliente.txtSaldo.setText(c.getTotalabonoCliente().toString());
-            viewCliente.txtTotalCompras.setText(c.getTotalcomprasCliente().toString());
+            viewCliente.txtTotalCompras.setText("$"+c.getTotalcomprasCliente().toString());
             
+            ArrayList <Venta> listaProductos= ctrlVenta.listByCliente(c.getIdCliente());
+            DefaultTableModel modelo= (DefaultTableModel) viewCliente.tablaProductos.getModel();
+            
+            for(Venta v: listaProductos){
+                Producto p=ctrlProducto.buscarPorID(v.getProducto().getIdProducto());
+                String[] fila = new String[5];
+                fila[0] = p.getIdProducto().toString();
+                fila[1] = p.getNombreProducto();
+                fila[2] = v.getCantidadVenta().toString();
+                fila[3] = p.getPrecioProducto().toString();
+                fila[4] = v.getMontoVenta().toString();
+                
+                modelo.addRow(fila);
+            }
+            
+            viewCliente.tablaProductos.setModel(modelo);
             
             if(c.getActivoCliente()){
                 viewCliente.cbEstado.setSelectedItem("ACTIVO");
@@ -323,12 +347,12 @@ public class MenuCliente extends javax.swing.JFrame {
             else{
                 viewCliente.cbEstado.setSelectedItem("INACTIVO");
                 viewCliente.btnAddProducto.setEnabled(false);
-                 viewCliente.btnAddAbono.setEnabled(false);
+                viewCliente.btnAddAbono.setEnabled(false);
             }
             
             if(c.getMorosoCliente()){
                 viewCliente.cbMoroso.setSelectedItem("SI");
-                 viewCliente.btnAddProducto.setEnabled(false);
+                viewCliente.btnAddProducto.setEnabled(false);
             }
             else{
                 viewCliente.cbMoroso.setSelectedItem("NO");
@@ -336,10 +360,10 @@ public class MenuCliente extends javax.swing.JFrame {
             
             
             Abono abono= ctrlAbono.ultimoAbonoCliente(c.getIdCliente());
-             if(abono!=null){
+            if(abono!=null){
                 SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
                 viewCliente.fechaUAbono.setText(sdf.format(abono.getFechaAbono()));
-                viewCliente.montoUAbono.setText("$"+abono.getSaldoAbono().toString());
+                viewCliente.montoUAbono.setText("$"+abono.getMontoAbono());
             }
             this.setVisible(false);
             viewCliente.setVisible(true);

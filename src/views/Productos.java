@@ -23,6 +23,8 @@ public class Productos extends javax.swing.JFrame {
      */
     public Productos() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         cbEstado.removeAllItems();
         cbEstado.addItem("ACTIVO");
         cbEstado.addItem("INACTIVO");
@@ -291,7 +293,7 @@ public class Productos extends javax.swing.JFrame {
                 else{
                     p1.setEstadoProducto(false);
                 }
-                                
+                
                 ctrlProducto.actualizarProducto(p1);
                 
                 JOptionPane.showMessageDialog (null, "El producto se ha actualizado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);

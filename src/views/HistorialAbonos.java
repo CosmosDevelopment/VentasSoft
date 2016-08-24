@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package views;
 
 import javax.swing.table.DefaultTableModel;
@@ -13,21 +13,24 @@ import javax.swing.table.TableColumn;
  * @author wasp
  */
 public class HistorialAbonos extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form historialAbonos
      */
     public HistorialAbonos() {
         initComponents();
-         DefaultTableModel modelo= (DefaultTableModel) tablaAbonos.getModel();
-      
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
+        DefaultTableModel modelo= (DefaultTableModel) tablaAbonos.getModel();
+        
         
         int filas= modelo.getRowCount();
         for(int i=1;i<=filas;i++){
             modelo.removeRow(0);
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,7 +141,7 @@ public class HistorialAbonos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -146,8 +149,8 @@ public class HistorialAbonos extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -166,7 +169,7 @@ public class HistorialAbonos extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

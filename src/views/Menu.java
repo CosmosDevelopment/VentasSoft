@@ -23,13 +23,9 @@ public class Menu extends javax.swing.JFrame {
         
         
         initComponents();
-        
-//        //set imagen btn cerrar sesion
-//        ImageIcon logout = new ImageIcon("src/images/logout.png");
-//        Icon iconLogOut= new ImageIcon(logout.getImage().getScaledInstance(botonCerrarSesion.getWidth(), botonCerrarSesion.getHeight(), Image.SCALE_DEFAULT));
-//        botonCerrarSesion.setIcon(iconLogOut);
-this.repaint();
-this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.repaint();
+        this.setResizable(false);
     }
     
     /**

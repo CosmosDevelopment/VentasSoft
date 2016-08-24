@@ -23,11 +23,12 @@ public class MenuProducto extends javax.swing.JFrame {
     public MenuProducto() {
         
         initComponents();
-        panelMenuCliente.setAlignmentX(CENTER_ALIGNMENT);
-        panelMenuCliente.setAlignmentY(CENTER_ALIGNMENT);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
         DefaultTableModel modelo= (DefaultTableModel) listaProductos.getModel();
         TableColumn tableColumn = listaProductos.getColumn("ID");
-        tableColumn.setPreferredWidth(0); 
+        tableColumn.setPreferredWidth(0);
         tableColumn.setMinWidth(0);
         tableColumn.setMaxWidth(0);
         
@@ -258,19 +259,19 @@ public class MenuProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void listaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaProductosMouseClicked
-       
+        
         Productos viewProducto = new Productos();
-     
+        
         viewProducto.txtNombreProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),1));
         viewProducto.txtPrecioProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),2));
         viewProducto.txtCantidadProducto.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),3));
         viewProducto.txtID.setText((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),0));
-       viewProducto.cbEstado.setSelectedItem((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),4));
-       
+        viewProducto.cbEstado.setSelectedItem((String) listaProductos.getValueAt(listaProductos.getSelectedRow(),4));
+        
         viewProducto.btnEditar.setVisible(true);
         viewProducto.txtNombreProducto.setEditable(false);
         viewProducto.txtPrecioProducto.setEditable(false);
-        viewProducto.txtCantidadProducto.setEditable(false);       
+        viewProducto.txtCantidadProducto.setEditable(false);
         viewProducto.cbEstado.setVisible(true);
         viewProducto.lblEstado.setVisible(true);
         viewProducto.cbEstado.setEnabled(false);

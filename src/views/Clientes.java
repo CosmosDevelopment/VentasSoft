@@ -22,15 +22,19 @@ import javax.swing.table.TableColumn;
  * @author wasp
  */
 public class Clientes extends javax.swing.JFrame {
-    
-    /**
-     * Creates new form AddCliente
-     */
+    // Para instanciar pantallas y ctrl
+    public  AddAbono ab;
+    public AddProducto ap;
     CtrlCliente ctrlCliente = new CtrlCliente();
     CtrlAbono ctrlAbono= new CtrlAbono();
+    
     public Clientes() {
         
         initComponents();
+        
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
         txtNroCliente.setEditable(false);
         txtNombre.setEditable(false);
         txtApellido.setEditable(false);
@@ -84,6 +88,7 @@ public class Clientes extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
         btnAddProducto = new javax.swing.JButton();
+        txtTotalCompras = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         btnVerAboos = new javax.swing.JButton();
@@ -103,9 +108,7 @@ public class Clientes extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         txtSaldo = new javax.swing.JLabel();
-        txtTotalCompras = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtNroCliente = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -141,7 +144,7 @@ public class Clientes extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Productos"));
 
-        jLabel3.setText("Total Compras: $");
+        jLabel3.setText("Total Compras: ");
 
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,7 +184,10 @@ public class Clientes extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(btnAddProducto))
+                    .addComponent(btnAddProducto)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(txtTotalCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 42, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -191,7 +197,9 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTotalCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAddProducto))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
@@ -269,25 +277,16 @@ public class Clientes extends javax.swing.JFrame {
 
         jLabel11.setText("Saldo: $");
 
-        jLabel10.setText("Total Compras: $");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotalCompras)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                .addGap(49, 49, 49))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,10 +295,6 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtSaldo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtTotalCompras))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -408,8 +403,9 @@ public class Clientes extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnActualizar)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnActualizar))
+                        .addGap(15, 15, 15))))
         );
 
         txtID.setText("jTextField1");
@@ -671,23 +667,23 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerAboosActionPerformed
 
     private void btnAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductoActionPerformed
-        AddProducto viewProducto= new AddProducto();
-        viewProducto.txtIDCliente.setText(txtID.getText());
-        viewProducto.setVisible(true);
+        ap= new AddProducto(this);
+        ap.txtIDCliente.setText(txtID.getText());
+        ap.setVisible(true);
         
     }//GEN-LAST:event_btnAddProductoActionPerformed
 
     private void btnAddAbonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAbonoActionPerformed
-        AddAbono viewAbono= new AddAbono();
+        ab= new AddAbono(this);
         
-        viewAbono.txtIDCliente.setText(txtID.getText());
+        ab.txtIDCliente.setText(txtID.getText());
         
-        viewAbono.setVisible(true);
+        ab.setVisible(true);
     }//GEN-LAST:event_btnAddAbonoActionPerformed
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         try {
-          
+            
 // TODO add your handling code here:
         } catch (Exception ex) {
             Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -755,7 +751,6 @@ public class Clientes extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbMoroso;
     public javax.swing.JLabel fechaUAbono;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -776,7 +771,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JLabel montoUAbono;
-    private javax.swing.JTable tablaProductos;
+    public javax.swing.JTable tablaProductos;
     public javax.swing.JTextField txtApellido;
     public javax.swing.JTextField txtDireccion;
     public javax.swing.JTextField txtID;
