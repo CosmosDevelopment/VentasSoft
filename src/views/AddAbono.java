@@ -150,7 +150,7 @@ public class AddAbono extends javax.swing.JFrame {
                 
             }
             else{
-                ab.setSaldoAbono(Integer.parseInt(txtMonto.getText()));
+                ab.setMontoAbono(Integer.parseInt(txtMonto.getText()));
             }
             
             if(mensaje.length()!=0){
@@ -161,13 +161,18 @@ public class AddAbono extends javax.swing.JFrame {
                 
                 ab.setCliente(cli);
                 ab.setFechaAbono(fechaAbono.getDate());
+                cli.setTotalabonoCliente(cli.getTotalabonoCliente()+Integer.parseInt(txtMonto.getText()));
+                int saldo= cli.getTotalcomprasCliente()-cli.getTotalabonoCliente();
                 
+                ab.setSaldoAbono(saldo);
                 ctrlAbono.agregarAbono(ab);
                 
+                
+                ctrlCliente.actualizarCliente(cli);
                 JOptionPane.showMessageDialog (null, "El abono se ha registrado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
                 
-                //Se limpian las variables
                 txtMonto.setText("");
+                
                 
                 this.dispose();
             }

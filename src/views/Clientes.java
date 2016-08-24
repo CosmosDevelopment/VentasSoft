@@ -119,6 +119,11 @@ public class Clientes extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/guardar.png"))); // NOI18N
         btnAdd.setText("Guardar ");
@@ -650,7 +655,7 @@ public class Clientes extends javax.swing.JFrame {
                 for(Abono a: listaAbonos){
                     String[] fila = new String[3] ;
                     fila[0] = sdf.format(a.getFechaAbono());
-                    fila[1] = a.getSaldoAbono().toString();
+                    fila[1] = a.getMontoAbono().toString();
                     fila[2] = a.getSaldoAbono().toString(); // TODO EDITAR
                     
                     
@@ -679,6 +684,15 @@ public class Clientes extends javax.swing.JFrame {
         
         viewAbono.setVisible(true);
     }//GEN-LAST:event_btnAddAbonoActionPerformed
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        try {
+          
+// TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formFocusGained
     private static boolean isNumeric(String cadena){
         try {
             Integer.parseInt(cadena);

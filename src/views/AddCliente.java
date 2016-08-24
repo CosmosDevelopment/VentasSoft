@@ -386,6 +386,8 @@ this.repaint();
             Cliente c= new Cliente();
             Set<Abono> setAbono = new HashSet<Abono>();
             Set<Venta> setVenta = new HashSet<Venta>();
+            c.setTotalabonoCliente(0);
+            c.setTotalcomprasCliente(0);
             
             if(txtNroCliente.getText().isEmpty() || txtNroCliente.getText()==null){
                 mensaje.append("·el número de cliente.\n");
