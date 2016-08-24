@@ -7,12 +7,15 @@ package views;
 
 import ctrl.CtrlAbono;
 import ctrl.CtrlCliente;
+import ctrl.CtrlVenta;
 import entidades.Abono;
 import entidades.Cliente;
 import entidades.Venta;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -23,12 +26,25 @@ public class AddCliente extends javax.swing.JFrame {
     // instancia ctrl y view
     CtrlCliente ctrlCliente = new CtrlCliente();
     CtrlAbono ctrlAbono = new CtrlAbono();
+    CtrlVenta ctrlVenta= new CtrlVenta();
+    
+    public  Set<Venta> setVenta = new HashSet<Venta>();
+    public String totalCompra="0";
+    
     
     public AddCliente() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        
+        DefaultTableModel modelo= (DefaultTableModel) tablaProductos.getModel();
+        TableColumn tableColumn = tablaProductos.getColumn("ID");
+        tableColumn.setPreferredWidth(0);
+        tableColumn.setMinWidth(0);
+        tableColumn.setMaxWidth(0);
+        int filas= modelo.getRowCount();
+        for(int i=1;i<=filas;i++){
+            modelo.removeRow(0);
+        }
         this.repaint();
     }
     
@@ -55,6 +71,7 @@ public class AddCliente extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        txtTotalCompras = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtNroCliente = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -68,7 +85,6 @@ public class AddCliente extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
         btnAddProducto = new javax.swing.JButton();
-        txtTotalCompras = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,9 +127,7 @@ public class AddCliente extends javax.swing.JFrame {
 
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
-        jLabel11.setText("Saldo: $");
-
-        jLabel3.setText("Total Compras: $");
+        jLabel3.setText("Total Compras: ");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -123,8 +137,11 @@ public class AddCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel3))
-                .addContainerGap(103, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTotalCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +149,9 @@ public class AddCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(txtTotalCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -284,15 +303,9 @@ public class AddCliente extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(txtTotalCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                        .addComponent(btnAddProducto)
-                        .addGap(45, 45, 45))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(btnAddProducto)
+                .addGap(45, 45, 45))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,9 +313,7 @@ public class AddCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(txtTotalCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(43, 43, 43)
                         .addComponent(btnAddProducto))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
@@ -383,7 +394,6 @@ public class AddCliente extends javax.swing.JFrame {
             
             //se crean las variables set de abono y venta
             Set<Abono> setAbono = new HashSet<Abono>();
-            Set<Venta> setVenta = new HashSet<Venta>();
             
             c.setTotalabonoCliente(0);
             c.setTotalcomprasCliente(0);
@@ -471,6 +481,7 @@ public class AddCliente extends javax.swing.JFrame {
             c.setMorosoCliente(false);
             c.setActivoCliente(true);
             
+            
             //se agrega el cliente
             ctrlCliente.agregarCliente(c);
             
@@ -478,9 +489,16 @@ public class AddCliente extends javax.swing.JFrame {
             ab.setCliente(c);
             setAbono.add(ab);
             
+            for(Venta v: setVenta){
+                v.setCliente(c);
+                ctrlVenta.agregarVenta(v);
+            }
+            
             
             ctrlAbono.agregarAbono(ab);
             c.setAbonos(setAbono);
+            c.setVentas(setVenta);
+            
             ctrlCliente.actualizarCliente(c);
             
             
@@ -494,6 +512,8 @@ public class AddCliente extends javax.swing.JFrame {
             txtDireccion.setText("");
             txtReferencia.setText("");
             txtTelefono.setText("");
+            txtPie.setText("");
+            tablaProductos.setModel(new DefaultTableModel());
             
         }
         catch(Exception e){
