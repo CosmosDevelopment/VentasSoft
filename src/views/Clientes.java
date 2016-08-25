@@ -727,16 +727,7 @@ public class Clientes extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Clientes().setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
