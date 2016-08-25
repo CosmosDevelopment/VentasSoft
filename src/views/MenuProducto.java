@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 /**
@@ -31,6 +32,15 @@ public class MenuProducto extends javax.swing.JFrame {
         tableColumn.setPreferredWidth(0);
         tableColumn.setMinWidth(0);
         tableColumn.setMaxWidth(0);
+        
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        listaProductos.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        listaProductos.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
+        listaProductos.getColumnModel().getColumn(2).setCellRenderer(modelocentrar);
+        listaProductos.getColumnModel().getColumn(3).setCellRenderer(modelocentrar);
+        listaProductos.getColumnModel().getColumn(4).setCellRenderer(modelocentrar);
         
         int filas= modelo.getRowCount();
         for(int i=1;i<=filas;i++){

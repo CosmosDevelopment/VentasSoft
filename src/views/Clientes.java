@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -60,6 +62,16 @@ public class Clientes extends javax.swing.JFrame {
         tableColumn.setPreferredWidth(0);
         tableColumn.setMinWidth(0);
         tableColumn.setMaxWidth(0);
+        
+         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        tablaProductos.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        tablaProductos.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
+        tablaProductos.getColumnModel().getColumn(2).setCellRenderer(modelocentrar);
+        tablaProductos.getColumnModel().getColumn(3).setCellRenderer(modelocentrar);
+        tablaProductos.getColumnModel().getColumn(4).setCellRenderer(modelocentrar);
+        
         
         int filas= modelo.getRowCount();
         for(int i=1;i<=filas;i++){
@@ -651,8 +663,8 @@ public class Clientes extends javax.swing.JFrame {
                 for(Abono a: listaAbonos){
                     String[] fila = new String[3] ;
                     fila[0] = sdf.format(a.getFechaAbono());
-                    fila[1] = a.getMontoAbono().toString();
-                    fila[2] = a.getSaldoAbono().toString(); // TODO EDITAR
+                    fila[1] = "$"+a.getMontoAbono().toString();
+                    fila[2] = "$"+a.getSaldoAbono().toString(); // TODO EDITAR
                     
                     
                     modelo.addRow(fila);

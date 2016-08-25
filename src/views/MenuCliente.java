@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 /**
@@ -46,6 +48,18 @@ public class MenuCliente extends javax.swing.JFrame {
         tableColumn.setPreferredWidth(0);
         tableColumn.setMinWidth(0);
         tableColumn.setMaxWidth(0);
+       DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        tablaClientes.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        tablaClientes.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
+        tablaClientes.getColumnModel().getColumn(2).setCellRenderer(modelocentrar);
+        tablaClientes.getColumnModel().getColumn(3).setCellRenderer(modelocentrar);
+        tablaClientes.getColumnModel().getColumn(4).setCellRenderer(modelocentrar);
+        tablaClientes.getColumnModel().getColumn(5).setCellRenderer(modelocentrar);
+        tablaClientes.getColumnModel().getColumn(6).setCellRenderer(modelocentrar);
+        tablaClientes.getColumnModel().getColumn(7).setCellRenderer(modelocentrar);
+        
         int filas= modelo.getRowCount();
         for(int i=1;i<=filas;i++){
             modelo.removeRow(0);
@@ -321,7 +335,8 @@ public class MenuCliente extends javax.swing.JFrame {
             viewCliente.txtDireccion.setText(c.getDireccionCliente());
             viewCliente.txtReferencia.setText(c.getReferenciaCliente());
             viewCliente.txtTelefono.setText(c.getTelefonoCliente());
-            viewCliente.txtSaldo.setText(c.getTotalabonoCliente().toString());
+            Integer saldo= c.getTotalcomprasCliente()-c.getTotalabonoCliente();
+            viewCliente.txtSaldo.setText(saldo.toString());
             viewCliente.txtTotalCompras.setText("$"+c.getTotalcomprasCliente().toString());
             
             ArrayList <Venta> listaProductos= ctrlVenta.listByCliente(c.getIdCliente());

@@ -5,8 +5,10 @@
 */
 package views;
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -23,11 +25,18 @@ public class HistorialAbonos extends javax.swing.JFrame {
         this.setResizable(false);
         
         DefaultTableModel modelo= (DefaultTableModel) tablaAbonos.getModel();
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
         
+        tablaAbonos.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        tablaAbonos.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
+        tablaAbonos.getColumnModel().getColumn(2).setCellRenderer(modelocentrar);
         
+        int columnas= modelo.getColumnCount();
         int filas= modelo.getRowCount();
         for(int i=1;i<=filas;i++){
             modelo.removeRow(0);
+            
         }
     }
     
@@ -147,35 +156,35 @@ public class HistorialAbonos extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-        */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HistorialAbonos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HistorialAbonos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HistorialAbonos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HistorialAbonos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+* For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+*/
+try {
+    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+        if ("Nimbus".equals(info.getName())) {
+            javax.swing.UIManager.setLookAndFeel(info.getClassName());
+            break;
         }
-        //</editor-fold>
-        //</editor-fold>
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HistorialAbonos().setVisible(true);
-            }
-        });
+    }
+} catch (ClassNotFoundException ex) {
+    java.util.logging.Logger.getLogger(HistorialAbonos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+} catch (InstantiationException ex) {
+    java.util.logging.Logger.getLogger(HistorialAbonos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+} catch (IllegalAccessException ex) {
+    java.util.logging.Logger.getLogger(HistorialAbonos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+    java.util.logging.Logger.getLogger(HistorialAbonos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+}
+//</editor-fold>
+//</editor-fold>
+
+/* Create and display the form */
+java.awt.EventQueue.invokeLater(new Runnable() {
+    public void run() {
+        new HistorialAbonos().setVisible(true);
+    }
+});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -170,7 +170,7 @@ public class AddAbono extends javax.swing.JFrame {
                 cli.setTotalabonoCliente(cli.getTotalabonoCliente()+Integer.parseInt(txtMonto.getText()));
                 
                 //calcula saldo para registrar
-                int saldo= cli.getTotalcomprasCliente()-cli.getTotalabonoCliente();
+                Integer saldo= cli.getTotalcomprasCliente()-cli.getTotalabonoCliente();
                 ab.setSaldoAbono(saldo);
                 
                 //agrega abono
@@ -186,8 +186,9 @@ public class AddAbono extends javax.swing.JFrame {
                 // actualiza ultimo abono pantalla Cliente
                 SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
                 c.fechaUAbono.setText(sdf.format(ab.getFechaAbono()));
-                c.montoUAbono.setText(ab.getMontoAbono().toString());
-                c.txtSaldo.setText(cli.getTotalabonoCliente().toString());
+                c.montoUAbono.setText("$"+ab.getMontoAbono().toString());
+                
+                c.txtSaldo.setText(saldo.toString());
                 
                 
                 this.dispose();

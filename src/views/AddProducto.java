@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -43,7 +45,18 @@ public class AddProducto extends javax.swing.JFrame {
         tableColumn.setPreferredWidth(0);
         tableColumn.setMinWidth(0);
         tableColumn.setMaxWidth(0);
+        
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        tableProducto.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        tableProducto.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
+        tableProducto.getColumnModel().getColumn(2).setCellRenderer(modelocentrar);
+        tableProducto.getColumnModel().getColumn(3).setCellRenderer(modelocentrar);
+        
         txtTotal.setText("0");
+        
+        
         int filas= modelo.getRowCount();
         for(int i=1;i<=filas;i++){
             modelo.removeRow(0);
@@ -332,7 +345,8 @@ public class AddProducto extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog (null, "El producto se ha agregado a la lista exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
                         
                         clientes.txtTotalCompras.setText("$"+c.getTotalcomprasCliente().toString());
-                        
+                        Integer saldo= c.getTotalcomprasCliente()-c.getTotalabonoCliente();
+                        clientes.txtSaldo.setText(saldo.toString());
                         DefaultTableModel model = (DefaultTableModel) clientes.tablaProductos.getModel();
                         model.addRow(new Object[]{p.getIdProducto().toString(),p.getNombreProducto(),venta.getCantidadVenta() ,"$"+p.getPrecioProducto(),"$"+venta.getMontoVenta()});
                         
@@ -408,7 +422,7 @@ public class AddProducto extends javax.swing.JFrame {
                         fila[0] = p.getIdProducto().toString();
                         fila[1] = p.getNombreProducto();
                         fila[2] = p.getCantidadProducto().toString();
-                        fila[3] ="$"+p.getPrecioProducto().toString();
+                        fila[3] =p.getPrecioProducto().toString();
                         
                         modelo.addRow(fila);
                     }
