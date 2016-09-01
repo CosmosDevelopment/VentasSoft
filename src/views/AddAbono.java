@@ -200,7 +200,13 @@ public class AddAbono extends javax.swing.JFrame {
             JOptionPane.showMessageDialog (null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {                                  
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+        evt.consume(); // ignorar el evento de teclado
+        }
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();        
     }//GEN-LAST:event_jButton1ActionPerformed

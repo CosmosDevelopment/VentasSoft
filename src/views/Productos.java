@@ -327,15 +327,37 @@ public class Productos extends javax.swing.JFrame {
     private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbEstadoActionPerformed
+        private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {                                           
+                char caracter  = evt.getKeyChar();
+                if(Character.isDigit(caracter)){
+                        evt.consume();
+                }
+        }                                          
+
+        private void txtCantidadProductoKeyTyped(java.awt.event.KeyEvent evt) {                                             
+           char caracter = evt.getKeyChar();
+                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                evt.consume(); // ignorar el evento de teclado
+                }
+        }                                            
+
+        private void txtPrecioProductoKeyTyped(java.awt.event.KeyEvent evt) {                                           
+                char caracter = evt.getKeyChar();
+                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                evt.consume(); // ignorar el evento de teclado
+                }
+        }          
     
-    private static boolean isNumeric(String cadena){
-        try {
-            Integer.parseInt(cadena);
-            return true;
-        } catch (NumberFormatException nfe){
-            return false;
+    
+    
+        private static boolean isNumeric(String cadena){
+            try {
+                Integer.parseInt(cadena);
+                return true;
+            } catch (NumberFormatException nfe){
+                return false;
+            }
         }
-    }
     
     /**
      * @param args the command line arguments

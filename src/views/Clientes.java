@@ -701,6 +701,42 @@ public class Clientes extends javax.swing.JFrame {
             Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formFocusGained
+     private void txtNroClienteKeyTyped(java.awt.event.KeyEvent evt) {                                       
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+        evt.consume(); // ignorar el evento de teclado
+        }
+    }                                      
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {                                   
+        char caracter  = evt.getKeyChar();
+        if(Character.isAlphabetic(caracter)){
+            evt.consume();
+        }
+    }                                  
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {                                     
+        char caracter  = evt.getKeyChar();
+        if(Character.isAlphabetic(caracter)){
+            evt.consume();
+        }
+    }                                    
+
+    private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {                                
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)&& (caracter!='k')&& (caracter!='.')&& (caracter!='-')) {
+        evt.consume(); // ignorar el evento de teclado
+        }   
+    }                               
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {                                     
+        char caracter  = evt.getKeyChar();
+        if(Character.isAlphabetic(caracter)){
+            evt.consume();
+        }
+    } 
+    
+    
     private static boolean isNumeric(String cadena){
         try {
             Integer.parseInt(cadena);

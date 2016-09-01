@@ -546,7 +546,42 @@ public class AddCliente extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+    
+    private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {                                
+       char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)&& (caracter!='k')&& (caracter!='.')&& (caracter!='-')) {
+        evt.consume(); // ignorar el evento de teclado
+        }   
+    }                               
 
+    private void txtNroClienteKeyTyped(java.awt.event.KeyEvent evt) {                                       
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+        evt.consume(); // ignorar el evento de teclado
+        }
+    }                                      
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {                                   
+        char caracter  = evt.getKeyChar();
+        if(Character.isDigit(caracter)){
+            evt.consume();
+        }
+    }                                  
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {                                     
+        char caracter  = evt.getKeyChar();
+        if(Character.isDigit(caracter)){
+            evt.consume();
+        }
+    }                                    
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {                                     
+        char caracter  = evt.getKeyChar();
+        if(Character.isAlphabetic(caracter)){
+            evt.consume();
+        }
+    }                  
+    
     private void btnAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductoActionPerformed
         AddProducto  ap= new AddProducto(this);
         ap.setVisible(true);
