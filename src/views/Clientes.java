@@ -449,8 +449,6 @@ public class Clientes extends javax.swing.JFrame {
                         .addGap(15, 15, 15))))
         );
 
-        txtID.setText("jTextField1");
-
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
