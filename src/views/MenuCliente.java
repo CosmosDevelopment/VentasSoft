@@ -394,10 +394,6 @@ public class MenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaClientesMouseClicked
 
     private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
-        cbBuscarCliente.addItem("RUT");
-        cbBuscarCliente.addItem("Nombre");
-        cbBuscarCliente.addItem("Apellido");
-        cbBuscarCliente.addItem("Número Cliente");
         if(cbBuscarCliente.getSelectedItem().equals("RUT")){
             char caracter = evt.getKeyChar();
             if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)&& (caracter!='k')&& (caracter!='.')&& (caracter!='-')) {
@@ -405,12 +401,12 @@ public class MenuCliente extends javax.swing.JFrame {
             } 
         }else if (cbBuscarCliente.getSelectedItem().equals("Nombre")){
             char caracter  = evt.getKeyChar();
-            if(Character.isAlphabetic(caracter)){
+            if(Character.isDigit(caracter)){
                 evt.consume();
             }
         }else if (cbBuscarCliente.getSelectedItem().equals("Apellido")){
             char caracter  = evt.getKeyChar();
-            if(Character.isAlphabetic(caracter)){
+            if(Character.isDigit(caracter)){
                 evt.consume();
             }
         }else if (cbBuscarCliente.getSelectedItem().equals("Número Cliente")){

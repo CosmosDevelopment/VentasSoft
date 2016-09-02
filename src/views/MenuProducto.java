@@ -297,10 +297,10 @@ public class MenuProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_listaProductosMouseClicked
 
     private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
-            char caracter  = evt.getKeyChar();
-            if(Character.isAlphabetic(caracter)){
-                evt.consume();
-            }
+        char caracter  = evt.getKeyChar();
+        if(Character.isDigit(caracter)){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtBusquedaKeyTyped
     
     /**
