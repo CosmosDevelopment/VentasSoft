@@ -101,6 +101,12 @@ public class MenuCliente extends javax.swing.JFrame {
             }
         });
 
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Encontrados:");
 
         botonAddCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addUser.png"))); // NOI18N
@@ -386,6 +392,34 @@ public class MenuCliente extends javax.swing.JFrame {
             Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tablaClientesMouseClicked
+
+    private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
+        cbBuscarCliente.addItem("RUT");
+        cbBuscarCliente.addItem("Nombre");
+        cbBuscarCliente.addItem("Apellido");
+        cbBuscarCliente.addItem("Número Cliente");
+        if(cbBuscarCliente.getSelectedItem().equals("RUT")){
+            char caracter = evt.getKeyChar();
+            if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)&& (caracter!='k')&& (caracter!='.')&& (caracter!='-')) {
+            evt.consume(); // ignorar el evento de teclado
+            } 
+        }else if (cbBuscarCliente.getSelectedItem().equals("Nombre")){
+            char caracter  = evt.getKeyChar();
+            if(Character.isAlphabetic(caracter)){
+                evt.consume();
+            }
+        }else if (cbBuscarCliente.getSelectedItem().equals("Apellido")){
+            char caracter  = evt.getKeyChar();
+            if(Character.isAlphabetic(caracter)){
+                evt.consume();
+            }
+        }else if (cbBuscarCliente.getSelectedItem().equals("Número Cliente")){
+            char caracter = evt.getKeyChar();
+            if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume(); // ignorar el evento de teclado
+            }
+        }
+    }//GEN-LAST:event_txtBusquedaKeyTyped
     
     /**
      * @param args the command line arguments

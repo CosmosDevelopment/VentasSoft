@@ -76,6 +76,12 @@ public class MenuProducto extends javax.swing.JFrame {
 
         jLabel2.setText("Buscar  por Nombre:");
 
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Encontrados:");
 
         botonAddProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addProduct.png"))); // NOI18N
@@ -289,6 +295,13 @@ public class MenuProducto extends javax.swing.JFrame {
         viewProducto.setVisible(true);
         
     }//GEN-LAST:event_listaProductosMouseClicked
+
+    private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
+            char caracter  = evt.getKeyChar();
+            if(Character.isAlphabetic(caracter)){
+                evt.consume();
+            }
+    }//GEN-LAST:event_txtBusquedaKeyTyped
     
     /**
      * @param args the command line arguments
