@@ -91,6 +91,11 @@ public class Productos extends javax.swing.JFrame {
                 txtNombreProductoActionPerformed(evt);
             }
         });
+        txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreProductoKeyTyped(evt);
+            }
+        });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
         btnEditar.setText("Editar");
@@ -102,7 +107,19 @@ public class Productos extends javax.swing.JFrame {
 
         jLabel3.setText("Cantidad:");
 
+        txtCantidadProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadProductoKeyTyped(evt);
+            }
+        });
+
         jLabel5.setText("Precio:");
+
+        txtPrecioProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioProductoKeyTyped(evt);
+            }
+        });
 
         lblEstado.setText("Estado:");
 
@@ -327,29 +344,28 @@ public class Productos extends javax.swing.JFrame {
     private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbEstadoActionPerformed
-        private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {                                           
-                char caracter  = evt.getKeyChar();
+
+    private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
+        char caracter  = evt.getKeyChar();
                 if(Character.isDigit(caracter)){
                         evt.consume();
                 }
-        }                                          
+    }//GEN-LAST:event_txtNombreProductoKeyTyped
 
-        private void txtCantidadProductoKeyTyped(java.awt.event.KeyEvent evt) {                                             
-           char caracter = evt.getKeyChar();
+    private void txtCantidadProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadProductoKeyTyped
+        char caracter = evt.getKeyChar();
                 if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
                 evt.consume(); // ignorar el evento de teclado
                 }
-        }                                            
+    }//GEN-LAST:event_txtCantidadProductoKeyTyped
 
-        private void txtPrecioProductoKeyTyped(java.awt.event.KeyEvent evt) {                                           
-                char caracter = evt.getKeyChar();
+    private void txtPrecioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioProductoKeyTyped
+          char caracter = evt.getKeyChar();
                 if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
                 evt.consume(); // ignorar el evento de teclado
                 }
-        }          
-    
-    
-    
+    }//GEN-LAST:event_txtPrecioProductoKeyTyped
+                                              
         private static boolean isNumeric(String cadena){
             try {
                 Integer.parseInt(cadena);

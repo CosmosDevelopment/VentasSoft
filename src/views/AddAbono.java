@@ -56,6 +56,12 @@ public class AddAbono extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha:");
 
+        txtMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMontoKeyTyped(evt);
+            }
+        });
+
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/guardar.png"))); // NOI18N
         btnGuardar.setText("Agregar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -200,16 +206,17 @@ public class AddAbono extends javax.swing.JFrame {
             JOptionPane.showMessageDialog (null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
-    private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {                                  
-        char caracter = evt.getKeyChar();
-        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-        evt.consume(); // ignorar el evento de teclado
-        }
-    }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
+         char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+        evt.consume(); // ignorar el evento de teclado
+        }
+    }//GEN-LAST:event_txtMontoKeyTyped
     private static boolean isNumeric(String cadena){
         try {
             Integer.parseInt(cadena);

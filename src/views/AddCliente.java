@@ -128,14 +128,37 @@ public class AddCliente extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Apellido:");
 
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyTyped(evt);
+            }
+        });
+
         jLabel5.setText("Rut:");
+
+        txtRut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRutKeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Dirección:");
 
         jLabel8.setText("Teléfono:");
+
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
 
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
@@ -168,6 +191,12 @@ public class AddCliente extends javax.swing.JFrame {
         );
 
         jLabel9.setText("Número Cliente:");
+
+        txtNroCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNroClienteKeyTyped(evt);
+            }
+        });
 
         jLabel13.setText("Referencia");
 
@@ -364,7 +393,7 @@ public class AddCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
@@ -547,46 +576,47 @@ public class AddCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
     
-    private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {                                
-       char caracter = evt.getKeyChar();
-        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)&& (caracter!='k')&& (caracter!='.')&& (caracter!='-')) {
-        evt.consume(); // ignorar el evento de teclado
-        }   
-    }                               
-
-    private void txtNroClienteKeyTyped(java.awt.event.KeyEvent evt) {                                       
-        char caracter = evt.getKeyChar();
-        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-        evt.consume(); // ignorar el evento de teclado
-        }
-    }                                      
-
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {                                   
-        char caracter  = evt.getKeyChar();
-        if(Character.isDigit(caracter)){
-            evt.consume();
-        }
-    }                                  
-
-    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {                                     
-        char caracter  = evt.getKeyChar();
-        if(Character.isDigit(caracter)){
-            evt.consume();
-        }
-    }                                    
-
-    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {                                     
-        char caracter  = evt.getKeyChar();
-        if(Character.isAlphabetic(caracter)){
-            evt.consume();
-        }
-    }                  
     
     private void btnAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductoActionPerformed
         AddProducto  ap= new AddProducto(this);
         ap.setVisible(true);
 
     }//GEN-LAST:event_btnAddProductoActionPerformed
+
+    private void txtNroClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNroClienteKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+        evt.consume(); // ignorar el evento de teclado
+        }
+    }//GEN-LAST:event_txtNroClienteKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+         char caracter  = evt.getKeyChar();
+        if(Character.isDigit(caracter)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        char caracter  = evt.getKeyChar();
+        if(Character.isDigit(caracter)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)&& (caracter!='k')&& (caracter!='.')&& (caracter!='-')) {
+        evt.consume(); // ignorar el evento de teclado
+        }   
+    }//GEN-LAST:event_txtRutKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+       char caracter  = evt.getKeyChar();
+        if(Character.isAlphabetic(caracter)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
     
     /**
      * @param args the command line arguments
