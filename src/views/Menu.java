@@ -46,6 +46,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 204));
+        setUndecorated(true);
 
         panelMenu.setName("panelMenu"); // NOI18N
 

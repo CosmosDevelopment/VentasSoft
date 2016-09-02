@@ -70,6 +70,7 @@ public class MenuProducto extends javax.swing.JFrame {
         listaProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         jLabel1.setText("Menú de Productos");

@@ -48,6 +48,7 @@ public class AddAbono extends javax.swing.JFrame {
         txtIDCliente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
         jLabel1.setText("Agregar Abono");
