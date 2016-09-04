@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24-08-2016 03:13:48 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entidades.Usuario" table="usuario" catalog="softventas" optimistic-lock="version">
-        <id name="passUsuario" type="string">
-            <column name="pass_usuario" />
+        <id name="idUsuario" type="string">
+            <column name="id_usuario" length="45" />
             <generator class="assigned" />
         </id>
+        <property name="passUsuario" type="string">
+            <column name="pass_usuario" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

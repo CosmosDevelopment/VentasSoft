@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24-08-2016 03:13:47 PM by Hibernate Tools 4.3.1
+// Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,15 +13,22 @@ public class Producto  implements java.io.Serializable {
 
      private Integer idProducto;
      private String nombreProducto;
-     private Integer cantidadProducto;
-     private Integer precioProducto;
-     private Boolean estadoProducto;
+     private int cantidadProducto;
+     private int precioProducto;
+     private boolean estadoProducto;
      private Set ventas = new HashSet(0);
 
     public Producto() {
     }
 
-    public Producto(String nombreProducto, Integer cantidadProducto, Integer precioProducto, Boolean estadoProducto, Set ventas) {
+	
+    public Producto(String nombreProducto, int cantidadProducto, int precioProducto, boolean estadoProducto) {
+        this.nombreProducto = nombreProducto;
+        this.cantidadProducto = cantidadProducto;
+        this.precioProducto = precioProducto;
+        this.estadoProducto = estadoProducto;
+    }
+    public Producto(String nombreProducto, int cantidadProducto, int precioProducto, boolean estadoProducto, Set ventas) {
        this.nombreProducto = nombreProducto;
        this.cantidadProducto = cantidadProducto;
        this.precioProducto = precioProducto;
@@ -43,25 +50,25 @@ public class Producto  implements java.io.Serializable {
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
     }
-    public Integer getCantidadProducto() {
+    public int getCantidadProducto() {
         return this.cantidadProducto;
     }
     
-    public void setCantidadProducto(Integer cantidadProducto) {
+    public void setCantidadProducto(int cantidadProducto) {
         this.cantidadProducto = cantidadProducto;
     }
-    public Integer getPrecioProducto() {
+    public int getPrecioProducto() {
         return this.precioProducto;
     }
     
-    public void setPrecioProducto(Integer precioProducto) {
+    public void setPrecioProducto(int precioProducto) {
         this.precioProducto = precioProducto;
     }
-    public Boolean getEstadoProducto() {
+    public boolean isEstadoProducto() {
         return this.estadoProducto;
     }
     
-    public void setEstadoProducto(Boolean estadoProducto) {
+    public void setEstadoProducto(boolean estadoProducto) {
         this.estadoProducto = estadoProducto;
     }
     public Set getVentas() {

@@ -193,7 +193,7 @@ public class AddAbono extends javax.swing.JFrame {
                 // actualiza ultimo abono pantalla Cliente
                 SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
                 c.fechaUAbono.setText(sdf.format(ab.getFechaAbono()));
-                c.montoUAbono.setText("$"+ab.getMontoAbono().toString());
+                c.montoUAbono.setText("$"+String.valueOf(ab.getMontoAbono()));
                 
                 c.txtSaldo.setText(saldo.toString());
                 

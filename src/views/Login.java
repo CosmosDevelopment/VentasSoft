@@ -5,9 +5,11 @@
 */
 package views;
 
+import ctrl.CtrlUsuario;
 import dao.daoCliente;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,12 +38,11 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPass = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 255));
-        setUndecorated(true);
 
         jPanel1.setFocusable(false);
         jPanel1.setName("panel"); // NOI18N
@@ -57,8 +58,6 @@ public class Login extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jPasswordField1.setText("jPasswordField1");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
 
@@ -76,7 +75,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField1)))
+                        .addComponent(txtPass)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(139, Short.MAX_VALUE)
@@ -93,7 +92,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                    .addComponent(txtPass))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(38, 38, 38))
@@ -120,9 +119,30 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Menu m= new Menu();
-        m.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        if(txtPass.getText().equals(" ")){
+            JOptionPane.showMessageDialog(this,evt,"Debe ingresar contraseña", WIDTH);
+        } else {
+            CtrlUsuario ctrlusuario = new CtrlUsuario();
+            try {
+                boolean respuesta = ctrlusuario.getPass(txtPass.getText());
+                if(respuesta){
+                    Menu m= new Menu();
+                    m.setVisible(true);
+                    this.setVisible(false);
+                }else{
+                     JOptionPane.showMessageDialog (null, "Error contraseña inválida, vuelva a intentarlo", "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+        
+        
+        
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
@@ -167,6 +187,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField txtPass;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24-08-2016 03:13:47 PM by Hibernate Tools 4.3.1
+// Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,17 +13,13 @@ public class Abono  implements java.io.Serializable {
      private Integer idAbono;
      private Cliente cliente;
      private Date fechaAbono;
-     private Integer saldoAbono;
-     private Integer montoAbono;
+     private int saldoAbono;
+     private int montoAbono;
 
     public Abono() {
     }
 
-	
-    public Abono(Cliente cliente) {
-        this.cliente = cliente;
-    }
-    public Abono(Cliente cliente, Date fechaAbono, Integer saldoAbono, Integer montoAbono) {
+    public Abono(Cliente cliente, Date fechaAbono, int saldoAbono, int montoAbono) {
        this.cliente = cliente;
        this.fechaAbono = fechaAbono;
        this.saldoAbono = saldoAbono;
@@ -51,18 +47,18 @@ public class Abono  implements java.io.Serializable {
     public void setFechaAbono(Date fechaAbono) {
         this.fechaAbono = fechaAbono;
     }
-    public Integer getSaldoAbono() {
+    public int getSaldoAbono() {
         return this.saldoAbono;
     }
     
-    public void setSaldoAbono(Integer saldoAbono) {
+    public void setSaldoAbono(int saldoAbono) {
         this.saldoAbono = saldoAbono;
     }
-    public Integer getMontoAbono() {
+    public int getMontoAbono() {
         return this.montoAbono;
     }
     
-    public void setMontoAbono(Integer montoAbono) {
+    public void setMontoAbono(int montoAbono) {
         this.montoAbono = montoAbono;
     }
 

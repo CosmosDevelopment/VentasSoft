@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24-08-2016 03:13:48 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entidades.Venta" table="venta" catalog="softventas" optimistic-lock="version">
         <id name="idVenta" type="java.lang.Integer">
@@ -14,14 +14,14 @@
         <many-to-one name="producto" class="entidades.Producto" fetch="select">
             <column name="producto_id_producto" not-null="true" />
         </many-to-one>
-        <property name="montoVenta" type="java.lang.Integer">
-            <column name="monto_venta" />
+        <property name="montoVenta" type="int">
+            <column name="monto_venta" not-null="true" />
         </property>
         <property name="fechaVenta" type="date">
-            <column name="fecha_venta" length="10" />
+            <column name="fecha_venta" length="10" not-null="true" />
         </property>
-        <property name="cantidadVenta" type="java.lang.Integer">
-            <column name="cantidad_venta" />
+        <property name="cantidadVenta" type="int">
+            <column name="cantidad_venta" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

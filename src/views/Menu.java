@@ -43,6 +43,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         botonCerrarSesion = new javax.swing.JButton();
         btnBackUp = new javax.swing.JButton();
+        btnCambiarContraseña = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 204));
@@ -97,15 +98,15 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(panelMenuLayout.createSequentialGroup()
                         .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelMenuLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnAreaCliente)
                                     .addGroup(panelMenuLayout.createSequentialGroup()
                                         .addGap(41, 41, 41)
                                         .addComponent(jLabel2)))
                                 .addGap(162, 162, 162))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
-                                .addComponent(botonCerrarSesion)
+                            .addGroup(panelMenuLayout.createSequentialGroup()
+                                .addComponent(btnBackUp, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelMenuLayout.createSequentialGroup()
@@ -115,8 +116,8 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(189, 189, 189))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
-                                .addComponent(btnBackUp, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51))))
+                                .addComponent(botonCerrarSesion)
+                                .addGap(25, 25, 25))))
                     .addGroup(panelMenuLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addContainerGap())))
@@ -136,12 +137,23 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(btnAreaCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)))
-                .addGap(44, 44, 44)
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBackUp))
-                .addGap(20, 20, 20))
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(botonCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBackUp)
+                        .addGap(28, 28, 28))))
         );
+
+        btnCambiarContraseña.setText("Cambiar contraseña");
+        btnCambiarContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarContraseñaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,11 +163,17 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCambiarContraseña)
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(13, 13, 13)
+                .addComponent(btnCambiarContraseña)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -164,7 +182,9 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
-        System.exit(0);
+        this.setVisible(false);
+        Login log=new  Login();
+        log.setVisible(true);
     }//GEN-LAST:event_botonCerrarSesionActionPerformed
 
     private void btnAreaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaClienteActionPerformed
@@ -181,11 +201,17 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpActionPerformed
         
-        new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","/home/wasp/Documentos/respaldo.txt");
-          JOptionPane.showMessageDialog (null, "Respaldo generado exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                
+        new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","C:'\'");
+        JOptionPane.showMessageDialog (null, "Respaldo generado exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        
         
     }//GEN-LAST:event_btnBackUpActionPerformed
+
+    private void btnCambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarContraseñaActionPerformed
+        cambiarContraseña cambiarPass = new cambiarContraseña();
+        cambiarPass.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCambiarContraseñaActionPerformed
     
     /**
      * @param args the command line arguments
@@ -227,6 +253,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnAreaCliente;
     private javax.swing.JButton btnAreaProducto;
     private javax.swing.JButton btnBackUp;
+    private javax.swing.JButton btnCambiarContraseña;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

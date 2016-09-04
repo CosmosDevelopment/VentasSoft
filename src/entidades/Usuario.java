@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24-08-2016 03:13:47 PM by Hibernate Tools 4.3.1
+// Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,15 +9,24 @@ package entidades;
 public class Usuario  implements java.io.Serializable {
 
 
+     private String idUsuario;
      private String passUsuario;
 
     public Usuario() {
     }
 
-    public Usuario(String passUsuario) {
+    public Usuario(String idUsuario, String passUsuario) {
+       this.idUsuario = idUsuario;
        this.passUsuario = passUsuario;
     }
    
+    public String getIdUsuario() {
+        return this.idUsuario;
+    }
+    
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
     public String getPassUsuario() {
         return this.passUsuario;
     }

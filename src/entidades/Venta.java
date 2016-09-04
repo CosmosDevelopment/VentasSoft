@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24-08-2016 03:13:47 PM by Hibernate Tools 4.3.1
+// Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,19 +13,14 @@ public class Venta  implements java.io.Serializable {
      private Integer idVenta;
      private Cliente cliente;
      private Producto producto;
-     private Integer montoVenta;
+     private int montoVenta;
      private Date fechaVenta;
-     private Integer cantidadVenta;
+     private int cantidadVenta;
 
     public Venta() {
     }
 
-	
-    public Venta(Cliente cliente, Producto producto) {
-        this.cliente = cliente;
-        this.producto = producto;
-    }
-    public Venta(Cliente cliente, Producto producto, Integer montoVenta, Date fechaVenta, Integer cantidadVenta) {
+    public Venta(Cliente cliente, Producto producto, int montoVenta, Date fechaVenta, int cantidadVenta) {
        this.cliente = cliente;
        this.producto = producto;
        this.montoVenta = montoVenta;
@@ -54,11 +49,11 @@ public class Venta  implements java.io.Serializable {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-    public Integer getMontoVenta() {
+    public int getMontoVenta() {
         return this.montoVenta;
     }
     
-    public void setMontoVenta(Integer montoVenta) {
+    public void setMontoVenta(int montoVenta) {
         this.montoVenta = montoVenta;
     }
     public Date getFechaVenta() {
@@ -68,11 +63,11 @@ public class Venta  implements java.io.Serializable {
     public void setFechaVenta(Date fechaVenta) {
         this.fechaVenta = fechaVenta;
     }
-    public Integer getCantidadVenta() {
+    public int getCantidadVenta() {
         return this.cantidadVenta;
     }
     
-    public void setCantidadVenta(Integer cantidadVenta) {
+    public void setCantidadVenta(int cantidadVenta) {
         this.cantidadVenta = cantidadVenta;
     }
 

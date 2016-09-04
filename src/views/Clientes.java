@@ -91,7 +91,6 @@ public class Clientes extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnAdd = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -140,9 +139,6 @@ public class Clientes extends javax.swing.JFrame {
                 formFocusGained(evt);
             }
         });
-
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/guardar.png"))); // NOI18N
-        btnAdd.setText("Guardar ");
 
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/volver.png"))); // NOI18N
         btnVolver.setText("Volver al Menú");
@@ -480,9 +476,7 @@ public class Clientes extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVolver)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -510,9 +504,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
@@ -636,9 +628,9 @@ public class Clientes extends javax.swing.JFrame {
                 btnAddAbono.setEnabled(false);
             }
             
-            
-            c.setMorosoCliente(rootPaneCheckingEnabled);
-            
+//            
+//            c.setMorosoCliente(rootPaneCheckingEnabled);
+//            
             
             ctrlCliente.actualizarCliente(c);
             JOptionPane.showMessageDialog (null, "El cliente se ha actualizado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
@@ -691,8 +683,8 @@ public class Clientes extends javax.swing.JFrame {
                 for(Abono a: listaAbonos){
                     String[] fila = new String[3] ;
                     fila[0] = sdf.format(a.getFechaAbono());
-                    fila[1] = "$"+a.getMontoAbono().toString();
-                    fila[2] = "$"+a.getSaldoAbono().toString(); // TODO EDITAR
+                    fila[1] = "$"+String.valueOf(a.getMontoAbono());
+                    fila[2] = "$"+String.valueOf(a.getSaldoAbono());
                     
                     
                     modelo.addRow(fila);
@@ -810,7 +802,6 @@ public class Clientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnAdd;
     public javax.swing.JButton btnAddAbono;
     public javax.swing.JButton btnAddProducto;
     public javax.swing.JButton btnEditar;

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24-08-2016 03:13:48 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entidades.Producto" table="producto" catalog="softventas" optimistic-lock="version">
         <id name="idProducto" type="java.lang.Integer">
@@ -9,16 +9,16 @@
             <generator class="identity" />
         </id>
         <property name="nombreProducto" type="string">
-            <column name="nombre_producto" />
+            <column name="nombre_producto" not-null="true" />
         </property>
-        <property name="cantidadProducto" type="java.lang.Integer">
-            <column name="cantidad_producto" />
+        <property name="cantidadProducto" type="int">
+            <column name="cantidad_producto" not-null="true" />
         </property>
-        <property name="precioProducto" type="java.lang.Integer">
-            <column name="precio_producto" />
+        <property name="precioProducto" type="int">
+            <column name="precio_producto" not-null="true" />
         </property>
-        <property name="estadoProducto" type="java.lang.Boolean">
-            <column name="estado_producto" />
+        <property name="estadoProducto" type="boolean">
+            <column name="estado_producto" not-null="true" />
         </property>
         <set name="ventas" table="venta" inverse="true" lazy="true" fetch="select">
             <key>

@@ -15,6 +15,7 @@ import entidades.Producto;
 import entidades.Venta;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -291,16 +292,16 @@ public class MenuCliente extends javax.swing.JFrame {
                     for(Cliente c: listaClientes){
                         String[] fila = new String[8];
                         fila[0] = c.getIdCliente().toString();
-                        fila[1] = c.getNumeroCliente().toString();
+                        fila[1] = String.valueOf(c.getNumeroCliente());
                         fila[2] = c.getNombreCliente();
                         fila[3] = c.getApellidoCliente();
                         fila[4] = c.getRutCliente();
                         fila[5] = c.getDireccionCliente();
-                        if(c.getMorosoCliente())
+                        if(c.isMorosoCliente())
                             moroso="SI";
                         else
                             moroso="NO";
-                        if(c.getActivoCliente())
+                        if(c.isActivoCliente())
                             estado="ACTIVO";
                         else
                             estado="INACTIVO";
@@ -335,7 +336,7 @@ public class MenuCliente extends javax.swing.JFrame {
             c=ctrlCliente.findByID((String) tablaClientes.getValueAt(tablaClientes.getSelectedRow(),0));
             
             viewCliente.txtID.setText(c.getIdCliente().toString());
-            viewCliente.txtNroCliente.setText(c.getNumeroCliente().toString());
+            viewCliente.txtNroCliente.setText(String.valueOf(c.getNumeroCliente()));
             viewCliente.txtNombre.setText(c.getNombreCliente());
             viewCliente.txtApellido.setText(c.getApellidoCliente());
             viewCliente.txtRut.setText(c.getRutCliente());
@@ -344,7 +345,7 @@ public class MenuCliente extends javax.swing.JFrame {
             viewCliente.txtTelefono.setText(c.getTelefonoCliente());
             Integer saldo= c.getTotalcomprasCliente()-c.getTotalabonoCliente();
             viewCliente.txtSaldo.setText(saldo.toString());
-            viewCliente.txtTotalCompras.setText("$"+c.getTotalcomprasCliente().toString());
+            viewCliente.txtTotalCompras.setText("$"+String.valueOf(c.getTotalcomprasCliente()));
             
             ArrayList <Venta> listaProductos= ctrlVenta.listByCliente(c.getIdCliente());
             DefaultTableModel modelo= (DefaultTableModel) viewCliente.tablaProductos.getModel();
@@ -354,16 +355,16 @@ public class MenuCliente extends javax.swing.JFrame {
                 String[] fila = new String[5];
                 fila[0] = p.getIdProducto().toString();
                 fila[1] = p.getNombreProducto();
-                fila[2] = v.getCantidadVenta().toString();
-                fila[3] = p.getPrecioProducto().toString();
-                fila[4] = v.getMontoVenta().toString();
+                fila[2] = String.valueOf(v.getCantidadVenta());
+                fila[3] = String.valueOf(p.getPrecioProducto());
+                fila[4] = String.valueOf(v.getMontoVenta());
                 
                 modelo.addRow(fila);
             }
             
             viewCliente.tablaProductos.setModel(modelo);
             
-            if(c.getActivoCliente()){
+            if(c.isActivoCliente()){
                 viewCliente.cbEstado.setSelectedItem("ACTIVO");
             }
             else{
@@ -372,7 +373,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 viewCliente.btnAddAbono.setEnabled(false);
             }
             
-            if(c.getMorosoCliente()){
+            if(c.isMorosoCliente()){
                 viewCliente.cbMoroso.setSelectedItem("SI");
                 viewCliente.btnAddProducto.setEnabled(false);
             }

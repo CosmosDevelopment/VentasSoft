@@ -11,6 +11,7 @@ import ctrl.CtrlVenta;
 import entidades.Abono;
 import entidades.Cliente;
 import entidades.Venta;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -281,6 +282,12 @@ public class AddCliente extends javax.swing.JFrame {
 
         jLabel14.setText("Monto Pie: $");
 
+        txtPie.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPieKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -433,21 +440,19 @@ public class AddCliente extends javax.swing.JFrame {
         try{
             StringBuilder mensaje=new StringBuilder();
             String titulo="Revise los siguientes datos:\n";
-            
+            Set<Abono> setAbono = new HashSet<Abono>();
+            boolean error=false;
             Cliente c= new Cliente();
             Abono ab= new Abono();
             
-            //se crean las variables set de abono y venta
-            Set<Abono> setAbono = new HashSet<Abono>();
-            
-            c.setTotalabonoCliente(0);
-            c.setTotalcomprasCliente(0);
             
             if(txtNroCliente.getText().isEmpty() || txtNroCliente.getText()==null){
                 mensaje.append("·el número de cliente.\n");
+                error=true;
             }
             else if(!isNumeric(txtNroCliente.getText())){
                 mensaje.append("·el número de cliente debe contener sólo números.\n");
+                error=true;
             }
             else{
                 c.setNumeroCliente(Integer.parseInt(txtNroCliente.getText()));
@@ -455,6 +460,7 @@ public class AddCliente extends javax.swing.JFrame {
             
             if(txtNombre.getText().isEmpty() || txtNombre.getText()==null){
                 mensaje.append("·el nombre del cliente.\n");
+                error=true;
             }
             else{
                 c.setNombreCliente(txtNombre.getText());
@@ -462,6 +468,7 @@ public class AddCliente extends javax.swing.JFrame {
             
             if(txtApellido.getText().isEmpty() || txtApellido.getText()==null){
                 mensaje.append("·el apellido del cliente.\n");
+                error=true;
             }
             else{
                 c.setApellidoCliente(txtApellido.getText());
@@ -473,6 +480,7 @@ public class AddCliente extends javax.swing.JFrame {
             }
             else{
                 mensaje.append("·el rut del cliente.\n");
+                error=true;
             }
             
             if(!txtDireccion.getText().isEmpty() && txtDireccion.getText()!=null){
@@ -480,86 +488,92 @@ public class AddCliente extends javax.swing.JFrame {
             }
             else{
                 mensaje.append("·la dirección del cliente.\n");
-            }
-            if(!txtDireccion.getText().isEmpty() && txtDireccion.getText()!=null){
-                c.setDireccionCliente(txtDireccion.getText());
-            }
-            else{
-                mensaje.append("·la dirección del cliente.\n");
+                error=true;
             }
             if(!txtReferencia.getText().isEmpty() && txtReferencia.getText()!=null){
                 c.setReferenciaCliente(txtReferencia.getText());
             }
             else{
                 mensaje.append("·referencia del cliente.\n");
+                error=true;
             }
             if(!txtTelefono.getText().isEmpty() && txtTelefono.getText()!=null){
                 c.setTelefonoCliente(txtTelefono.getText());
             }
             else{
                 mensaje.append("·el teléfono del cliente.\n");
+                error=true;
             }
             
-            if(!txtPie.getText().isEmpty() && txtPie.getText()!=null ){
-                if(isNumeric(txtPie.getText())){
-                    
-                    ab.setFechaAbono(fechaPie.getDate());
-                    ab.setMontoAbono(Integer.parseInt(txtPie.getText()));
-                    //TODO CORREGIR
-                    ab.setSaldoAbono(0);
-                    
-                }
-                else{
-                    mensaje.append("·el pie debe contener sólo números.\n");
-                }
-                c.setTelefonoCliente(txtTelefono.getText());
-            }
-            else{
-                mensaje.append("·el teléfono del cliente.\n");
-            }
-            
-            
-            c.setAbonos(setAbono);
-            c.setVentas(setVenta);
-            c.setTotalabonoCliente(0);
-            c.setTotalcomprasCliente(0);
-            c.setMorosoCliente(false);
-            c.setActivoCliente(true);
             
             
             //se agrega el cliente
-            ctrlCliente.agregarCliente(c);
-            
-            // se setea cliente al pie
-            ab.setCliente(c);
-            setAbono.add(ab);
-            
-            for(Venta v: setVenta){
-                v.setCliente(c);
-                ctrlVenta.agregarVenta(v);
+            if(!error){
+                ctrlCliente.agregarCliente(c);
+                
+                Integer totalVentas=0;
+                
+                for(Venta v: setVenta){
+                    v.setCliente(c);
+                    ctrlVenta.agregarVenta(v);
+                    totalVentas=+v.getMontoVenta();
+                }
+                c.setVentas(setVenta);
+                c.setTotalcomprasCliente(totalVentas);
+                
+                
+                if(!txtPie.getText().isEmpty() && txtPie.getText()!=null ){
+                    if(isNumeric(txtPie.getText())){
+                        ab.setFechaAbono(fechaPie.getDate());
+                        ab.setMontoAbono(Integer.parseInt(txtPie.getText()));
+                        ab.setSaldoAbono(totalVentas-Integer.parseInt(txtPie.getText()));
+                        
+                    }
+                    
+                }
+                else{
+                    ab.setFechaAbono(new Date());
+                    ab.setMontoAbono(0);
+                    ab.setSaldoAbono(0);
+                    ab.setSaldoAbono(totalVentas);
+                    
+                    
+                }
+                
+                ab.setCliente(c);
+                setAbono.add(ab);
+                
+                ctrlAbono.agregarAbono(ab);
+                c.setAbonos(setAbono);
+                
+                c.setVentas(setVenta);
+                c.setTotalabonoCliente(ab.getMontoAbono());
+                c.setMorosoCliente(false);
+                c.setActivoCliente(true);
+                
+                
+                
+                ctrlCliente.actualizarCliente(c);
+                
+                
+                JOptionPane.showMessageDialog (null, "El cliente se ha registrado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
+                
+                //Limpia datos
+                txtNroCliente.setText("");
+                txtNombre.setText("");
+                txtApellido.setText("");
+                txtRut.setText("");
+                txtDireccion.setText("");
+                txtReferencia.setText("");
+                txtTelefono.setText("");
+                txtPie.setText("");
+                tablaProductos.setModel(new DefaultTableModel());
             }
-            
-            
-            ctrlAbono.agregarAbono(ab);
-            c.setAbonos(setAbono);
-            c.setVentas(setVenta);
-            
-            ctrlCliente.actualizarCliente(c);
-            
-            
-            JOptionPane.showMessageDialog (null, "El cliente se ha registrado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
-            
-            //Limpia datos
-            txtNroCliente.setText("");
-            txtNombre.setText("");
-            txtApellido.setText("");
-            txtRut.setText("");
-            txtDireccion.setText("");
-            txtReferencia.setText("");
-            txtTelefono.setText("");
-            txtPie.setText("");
-            tablaProductos.setModel(new DefaultTableModel());
-            
+            if(mensaje.length()!=0){
+                mensaje.append("para guardar el producto.");
+                String mensajeAMostrar=titulo+mensaje;
+                JOptionPane.showMessageDialog (null, mensajeAMostrar, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
         catch(Exception e){
             JOptionPane.showMessageDialog (null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -590,12 +604,12 @@ public class AddCliente extends javax.swing.JFrame {
     private void txtNroClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNroClienteKeyTyped
         char caracter = evt.getKeyChar();
         if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-        evt.consume(); // ignorar el evento de teclado
+            evt.consume(); // ignorar el evento de teclado
         }
     }//GEN-LAST:event_txtNroClienteKeyTyped
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-         char caracter  = evt.getKeyChar();
+        char caracter  = evt.getKeyChar();
         if(Character.isDigit(caracter)){
             evt.consume();
         }
@@ -611,16 +625,23 @@ public class AddCliente extends javax.swing.JFrame {
     private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
         char caracter = evt.getKeyChar();
         if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)&& (caracter!='k')&& (caracter!='.')&& (caracter!='-')) {
-        evt.consume(); // ignorar el evento de teclado
+            evt.consume(); // ignorar el evento de teclado
         }   
     }//GEN-LAST:event_txtRutKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
-       char caracter  = evt.getKeyChar();
+        char caracter  = evt.getKeyChar();
         if(Character.isAlphabetic(caracter)){
             evt.consume();
         }
     }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtPieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPieKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume(); // ignorar el evento de teclado
+        }
+    }//GEN-LAST:event_txtPieKeyTyped
     
     /**
      * @param args the command line arguments

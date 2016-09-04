@@ -248,10 +248,10 @@ public class MenuProducto extends javax.swing.JFrame {
                         String[] fila = new String[5];
                         fila[0] = p.getIdProducto().toString();
                         fila[1] = p.getNombreProducto();
-                        fila[2] = p.getPrecioProducto().toString();
-                        fila[3] = p.getCantidadProducto().toString();
+                        fila[2] = String.valueOf(p.getPrecioProducto());
+                        fila[3] = String.valueOf(p.getCantidadProducto());
                         
-                        if(p.getEstadoProducto()){
+                        if(p.isEstadoProducto()){
                             estadoProducto="ACTIVO";
                         }
                         else{

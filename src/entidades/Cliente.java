@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24-08-2016 03:13:47 PM by Hibernate Tools 4.3.1
+// Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,18 +18,31 @@ public class Cliente  implements java.io.Serializable {
      private String telefonoCliente;
      private String direccionCliente;
      private String referenciaCliente;
-     private Boolean morosoCliente;
-     private Boolean activoCliente;
-     private Integer totalcomprasCliente;
-     private Integer totalabonoCliente;
-     private Integer numeroCliente;
+     private boolean morosoCliente;
+     private boolean activoCliente;
+     private int totalcomprasCliente;
+     private int totalabonoCliente;
+     private int numeroCliente;
      private Set ventas = new HashSet(0);
      private Set abonos = new HashSet(0);
 
     public Cliente() {
     }
 
-    public Cliente(String nombreCliente, String apellidoCliente, String rutCliente, String telefonoCliente, String direccionCliente, String referenciaCliente, Boolean morosoCliente, Boolean activoCliente, Integer totalcomprasCliente, Integer totalabonoCliente, Integer numeroCliente, Set ventas, Set abonos) {
+	
+    public Cliente(String nombreCliente, String apellidoCliente, String rutCliente, String telefonoCliente, String direccionCliente, boolean morosoCliente, boolean activoCliente, int totalcomprasCliente, int totalabonoCliente, int numeroCliente) {
+        this.nombreCliente = nombreCliente;
+        this.apellidoCliente = apellidoCliente;
+        this.rutCliente = rutCliente;
+        this.telefonoCliente = telefonoCliente;
+        this.direccionCliente = direccionCliente;
+        this.morosoCliente = morosoCliente;
+        this.activoCliente = activoCliente;
+        this.totalcomprasCliente = totalcomprasCliente;
+        this.totalabonoCliente = totalabonoCliente;
+        this.numeroCliente = numeroCliente;
+    }
+    public Cliente(String nombreCliente, String apellidoCliente, String rutCliente, String telefonoCliente, String direccionCliente, String referenciaCliente, boolean morosoCliente, boolean activoCliente, int totalcomprasCliente, int totalabonoCliente, int numeroCliente, Set ventas, Set abonos) {
        this.nombreCliente = nombreCliente;
        this.apellidoCliente = apellidoCliente;
        this.rutCliente = rutCliente;
@@ -94,39 +107,39 @@ public class Cliente  implements java.io.Serializable {
     public void setReferenciaCliente(String referenciaCliente) {
         this.referenciaCliente = referenciaCliente;
     }
-    public Boolean getMorosoCliente() {
+    public boolean isMorosoCliente() {
         return this.morosoCliente;
     }
     
-    public void setMorosoCliente(Boolean morosoCliente) {
+    public void setMorosoCliente(boolean morosoCliente) {
         this.morosoCliente = morosoCliente;
     }
-    public Boolean getActivoCliente() {
+    public boolean isActivoCliente() {
         return this.activoCliente;
     }
     
-    public void setActivoCliente(Boolean activoCliente) {
+    public void setActivoCliente(boolean activoCliente) {
         this.activoCliente = activoCliente;
     }
-    public Integer getTotalcomprasCliente() {
+    public int getTotalcomprasCliente() {
         return this.totalcomprasCliente;
     }
     
-    public void setTotalcomprasCliente(Integer totalcomprasCliente) {
+    public void setTotalcomprasCliente(int totalcomprasCliente) {
         this.totalcomprasCliente = totalcomprasCliente;
     }
-    public Integer getTotalabonoCliente() {
+    public int getTotalabonoCliente() {
         return this.totalabonoCliente;
     }
     
-    public void setTotalabonoCliente(Integer totalabonoCliente) {
+    public void setTotalabonoCliente(int totalabonoCliente) {
         this.totalabonoCliente = totalabonoCliente;
     }
-    public Integer getNumeroCliente() {
+    public int getNumeroCliente() {
         return this.numeroCliente;
     }
     
-    public void setNumeroCliente(Integer numeroCliente) {
+    public void setNumeroCliente(int numeroCliente) {
         this.numeroCliente = numeroCliente;
     }
     public Set getVentas() {

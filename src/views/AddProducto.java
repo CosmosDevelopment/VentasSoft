@@ -315,7 +315,6 @@ public class AddProducto extends javax.swing.JFrame {
                 
                 if(cantidadStock>=0){
                     if(this.clientes!=null){
-                        System.out.println("entre al 1");
                         
                         venta.setProducto(p);
                         
@@ -345,7 +344,7 @@ public class AddProducto extends javax.swing.JFrame {
                         ctrlCliente.actualizarCliente(c);
                         JOptionPane.showMessageDialog (null, "El producto se ha agregado a la lista exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
                         
-                        clientes.txtTotalCompras.setText("$"+c.getTotalcomprasCliente().toString());
+                        clientes.txtTotalCompras.setText("$"+String.valueOf(c.getTotalcomprasCliente()));
                         Integer saldo= c.getTotalcomprasCliente()-c.getTotalabonoCliente();
                         clientes.txtSaldo.setText(saldo.toString());
                         DefaultTableModel model = (DefaultTableModel) clientes.tablaProductos.getModel();
@@ -355,8 +354,6 @@ public class AddProducto extends javax.swing.JFrame {
                         this.dispose();
                     }
                     else{
-                        System.out.println("entre al 2");
-                        
                         venta.setProducto(p);
                         
                         venta.setFechaVenta(txtFecha.getDate());
@@ -422,8 +419,8 @@ public class AddProducto extends javax.swing.JFrame {
                         String[] fila = new String[4];
                         fila[0] = p.getIdProducto().toString();
                         fila[1] = p.getNombreProducto();
-                        fila[2] = p.getCantidadProducto().toString();
-                        fila[3] =p.getPrecioProducto().toString();
+                        fila[2] =String.valueOf(p.getCantidadProducto());
+                        fila[3] =String.valueOf(p.getPrecioProducto());
                         
                         modelo.addRow(fila);
                     }

@@ -256,21 +256,26 @@ public class Productos extends javax.swing.JFrame {
         try{
             StringBuilder mensaje=new StringBuilder();
             String titulo="Revise los siguientes datos:\n";
-            
+            boolean error=false;
             Producto p= new Producto();
             if(!txtNombreProducto.getText().isEmpty() && txtNombreProducto.getText()!=null){
                 p.setNombreProducto(txtNombreProducto.getText());
             }
             else {
                 mensaje.append("·el nombre.\n");
-                
+                error=true;
             }
             if(txtCantidadProducto.getText().isEmpty() || txtCantidadProducto.getText()==null ){
                 mensaje.append("·la cantidad.\n");
-                
+                error=true;
             }
             else if (!isNumeric(txtCantidadProducto.getText())){
                 mensaje.append("·la cantidad debe contener sólo números.\n");
+                error=true;
+            }
+            else if(txtCantidadProducto.getText().equals("0")){
+                mensaje.append("·la cantidad debe ser mayor a 0.\n");
+                error=true;
             }
             else{
                 p.setCantidadProducto(Integer.parseInt(txtCantidadProducto.getText()));
@@ -278,9 +283,15 @@ public class Productos extends javax.swing.JFrame {
             }
             if(txtPrecioProducto.getText().isEmpty() || txtPrecioProducto.getText()==null){
                 mensaje.append("·el precio.\n ");
+                error=true;
             }
             else if(!isNumeric(txtPrecioProducto.getText())){
                 mensaje.append("·el precio debe contener sólo números.\n");
+                error=true;
+            }
+            else if(txtPrecioProducto.getText().equals("0")){
+                mensaje.append("·el precio debe ser mayor a 0.\n");
+                error=true;
             }
             else{
                 p.setPrecioProducto(Integer.parseInt(txtPrecioProducto.getText()));
@@ -294,9 +305,16 @@ public class Productos extends javax.swing.JFrame {
             //se agrega el producto
             
             if(btnAdd.getText().equals("Guardar")){
+                if(!error){
+                    ctrlProducto.agregarProducto(p);
+                    JOptionPane.showMessageDialog (null, "El producto se ha registrado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
+                    //Se limpian las variables
+                    txtNombreProducto.setText("");
+                    txtCantidadProducto.setText("");
+                    txtPrecioProducto.setText("");
+                    cbEstado.setSelectedItem(null);
+                }
                 
-                ctrlProducto.agregarProducto(p);
-                JOptionPane.showMessageDialog (null, "El producto se ha registrado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
             }
             else{
                 
@@ -311,20 +329,18 @@ public class Productos extends javax.swing.JFrame {
                 else{
                     p1.setEstadoProducto(false);
                 }
-                
-                ctrlProducto.actualizarProducto(p1);
-                
-                JOptionPane.showMessageDialog (null, "El producto se ha actualizado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
-                
+                if(!error){
+                    ctrlProducto.actualizarProducto(p1);
+                    JOptionPane.showMessageDialog (null, "El producto se ha actualizado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
+                    MenuProducto mc= new  MenuProducto();
+                    mc.setVisible(true);
+                    this.setVisible(false);
+                }
             }
-            //Se limpian las variables
-            txtNombreProducto.setText("");
-            txtCantidadProducto.setText("");
-            txtPrecioProducto.setText("");
-            cbEstado.setSelectedItem(null);
+            
             
         }catch(Exception e){
-            JOptionPane.showMessageDialog (null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog (null, "Ha ocurrido un error al guardar el producto", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnAddActionPerformed
@@ -348,33 +364,33 @@ public class Productos extends javax.swing.JFrame {
 
     private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
         char caracter  = evt.getKeyChar();
-                if(Character.isDigit(caracter)){
-                        evt.consume();
-                }
+        if(Character.isDigit(caracter)){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNombreProductoKeyTyped
 
     private void txtCantidadProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadProductoKeyTyped
         char caracter = evt.getKeyChar();
-                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-                evt.consume(); // ignorar el evento de teclado
-                }
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume(); // ignorar el evento de teclado
+        }
     }//GEN-LAST:event_txtCantidadProductoKeyTyped
 
     private void txtPrecioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioProductoKeyTyped
-          char caracter = evt.getKeyChar();
-                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-                evt.consume(); // ignorar el evento de teclado
-                }
-    }//GEN-LAST:event_txtPrecioProductoKeyTyped
-                                              
-        private static boolean isNumeric(String cadena){
-            try {
-                Integer.parseInt(cadena);
-                return true;
-            } catch (NumberFormatException nfe){
-                return false;
-            }
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+            evt.consume(); // ignorar el evento de teclado
         }
+    }//GEN-LAST:event_txtPrecioProductoKeyTyped
+    
+    private static boolean isNumeric(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
+        }
+    }
     
     /**
      * @param args the command line arguments
