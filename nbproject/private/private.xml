@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/VentasSoft/src/views/AddAbono.java</file>
+            <file>file:/home/wasp/NetBeansProjects/VentasSoft/src/ctrl/CtrlUsuario.java</file>
+            <file>file:/home/wasp/NetBeansProjects/VentasSoft/src/views/cambiarContraseña.java</file>
+            <file>file:/home/wasp/NetBeansProjects/VentasSoft/src/views/Login.java</file>
+            <file>file:/home/wasp/NetBeansProjects/VentasSoft/src/hibernate.cfg.xml</file>
+            <file>file:/home/wasp/NetBeansProjects/VentasSoft/src/hibernate.reveng.xml</file>
+            <file>file:/home/wasp/NetBeansProjects/VentasSoft/src/views/HistorialAbonos.java</file>
+            <file>file:/home/wasp/NetBeansProjects/VentasSoft/src/META-INF/persistence.xml</file>
+            <file>file:/home/wasp/NetBeansProjects/VentasSoft/src/views/Menu.java</file>
         </group>
     </open-files>
 </project-private>

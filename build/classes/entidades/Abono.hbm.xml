@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24-08-2016 0:50:34 by Hibernate Tools 4.3.1 -->
+<!-- Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entidades.Abono" table="abono" catalog="softventas" optimistic-lock="version">
         <id name="idAbono" type="java.lang.Integer">
@@ -12,13 +12,13 @@
             <column name="id_cliente" not-null="true" />
         </many-to-one>
         <property name="fechaAbono" type="date">
-            <column name="fecha_abono" length="10" />
+            <column name="fecha_abono" length="10" not-null="true" />
         </property>
-        <property name="saldoAbono" type="java.lang.Integer">
-            <column name="saldo_abono" />
+        <property name="saldoAbono" type="int">
+            <column name="saldo_abono" not-null="true" />
         </property>
-        <property name="montoAbono" type="java.lang.Integer">
-            <column name="monto_abono" />
+        <property name="montoAbono" type="int">
+            <column name="monto_abono" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>
