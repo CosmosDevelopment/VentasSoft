@@ -28,7 +28,7 @@ public class BackUp {
         try{
             //sentencia para crear el BackUp
             Process run = Runtime.getRuntime().exec(
-                    "mysqldump --host=" + host + " --port=" + port +
+                    "C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump --host=" + host + " --port=" + port +
                             " --user=" + user + " --password=" + password +
                             " --compact --complete-insert --extended-insert --skip-quote-names" +
                             " --skip-comments --skip-triggers " + db);

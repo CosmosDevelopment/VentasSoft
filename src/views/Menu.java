@@ -6,6 +6,8 @@
 package views;
 
 import ctrl.BackUp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -200,8 +202,12 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAreaProductoActionPerformed
 
     private void btnBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpActionPerformed
-    
-        new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","C:\\dump.sql");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date fecha= new Date();
+        String fechaConvert= sdf.format(fecha);
+        
+        System.out.println(fechaConvert);
+        new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","C:\\Dumps\\dump-"+fechaConvert  +".sql");
         JOptionPane.showMessageDialog (null, "Respaldo generado exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         
         

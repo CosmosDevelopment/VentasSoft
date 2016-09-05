@@ -6,7 +6,8 @@
 package views;
 
 import ctrl.CtrlUsuario;
-import dao.daoCliente;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,6 +44,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 255));
+        setIconImage(getIconImage());
 
         jPanel1.setFocusable(false);
         jPanel1.setName("panel"); // NOI18N
@@ -117,7 +119,14 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/icono.png"));
+        
+        
+        return retValue;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(txtPass.getText().equals(" ")){
             JOptionPane.showMessageDialog(this,evt,"Debe ingresar contraseña", WIDTH);
@@ -130,7 +139,7 @@ public class Login extends javax.swing.JFrame {
                     m.setVisible(true);
                     this.setVisible(false);
                 }else{
-                     JOptionPane.showMessageDialog (null, "Error contraseña inválida, vuelva a intentarlo", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog (null, "Error contraseña inválida, vuelva a intentarlo", "Error", JOptionPane.ERROR_MESSAGE);
                     
                 }
             } catch (Exception ex) {
