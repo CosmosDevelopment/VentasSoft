@@ -6,6 +6,8 @@
 package views;
 
 import ctrl.CtrlUsuario;
+import it.sauronsoftware.junique.AlreadyLockedException;
+import it.sauronsoftware.junique.JUnique;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -183,8 +185,24 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
                 
+                String appId = "myapplicationid";
+                boolean alreadyRunning;
+                
+                
+                try {
+                    JUnique.acquireLock(appId);
+                    alreadyRunning = false;
+                } catch (AlreadyLockedException e) {
+                    alreadyRunning = true;
+                }
+                if (!alreadyRunning) {
+                    new Login().setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog (null, "La aplicación ya se encuentra en ejecución", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
             }
         });
     }
