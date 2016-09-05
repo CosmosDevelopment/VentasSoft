@@ -97,6 +97,7 @@ public class AddProducto extends javax.swing.JFrame {
 
         jDatePickerUtil1 = new org.jdatepicker.util.JDatePickerUtil();
         jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
@@ -287,7 +288,7 @@ public class AddProducto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,7 +441,7 @@ public class AddProducto extends javax.swing.JFrame {
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         char caracter = evt.getKeyChar();
         if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-        evt.consume(); // ignorar el evento de teclado
+            evt.consume(); // ignorar el evento de teclado
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
 
