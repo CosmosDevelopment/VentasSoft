@@ -200,8 +200,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAreaProductoActionPerformed
 
     private void btnBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpActionPerformed
-        
-        new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","C:\\dump.txt'");
+    
+        new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","C:\\dump.sql");
         JOptionPane.showMessageDialog (null, "Respaldo generado exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         
         
