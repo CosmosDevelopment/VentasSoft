@@ -150,6 +150,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(28, 28, 28))))
         );
 
+        btnCambiarContraseña.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pass.png"))); // NOI18N
         btnCambiarContraseña.setText("Cambiar contraseña");
         btnCambiarContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +207,7 @@ public class Menu extends javax.swing.JFrame {
         Date fecha= new Date();
         String fechaConvert= sdf.format(fecha);
         
-        System.out.println(fechaConvert);
+        
         new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","C:\\Dumps\\dump-"+fechaConvert  +".sql");
         JOptionPane.showMessageDialog (null, "Respaldo generado exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         

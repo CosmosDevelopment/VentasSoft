@@ -38,8 +38,7 @@ public class CtrlUsuario {
       
         ArrayList<Usuario> usuario;
         try {
-            System.out.println(passAntigua);
-            System.out.println(passNueva);
+           
             usuario = daoU.getPass(passAntigua);
             String respuesta = usuario.get(0).getIdUsuario();
             if (respuesta.equals("1")){

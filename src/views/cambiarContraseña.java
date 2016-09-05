@@ -35,10 +35,10 @@ public class cambiarContraseña extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        txtContraseñaOld = new javax.swing.JTextField();
-        txtContraseñaNew1 = new javax.swing.JTextField();
-        txtContraseñaNew2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        txtContraseñaOld = new javax.swing.JPasswordField();
+        txtContraseñaNew1 = new javax.swing.JPasswordField();
+        txtContraseñaNew2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -52,6 +52,7 @@ public class cambiarContraseña extends javax.swing.JFrame {
 
         jLabel4.setText("Repetir Contraseña:");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/guardar.png"))); // NOI18N
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +60,7 @@ public class cambiarContraseña extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/volver.png"))); // NOI18N
         jButton2.setText("Volver");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +81,9 @@ public class cambiarContraseña extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,37 +94,35 @@ public class cambiarContraseña extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addGap(34, 34, 34)))
                             .addComponent(jLabel4))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtContraseñaOld)
-                            .addComponent(txtContraseñaNew1)
-                            .addComponent(txtContraseñaNew2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel1)))
-                .addContainerGap(118, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtContraseñaOld, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtContraseñaNew1)
+                                    .addComponent(txtContraseñaNew2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))))))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtContraseñaOld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(40, 40, 40)
+                    .addComponent(jLabel2)
+                    .addComponent(txtContraseñaOld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtContraseñaNew1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtContraseñaNew2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtContraseñaNew2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -130,6 +133,7 @@ public class cambiarContraseña extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
         if(txtContraseñaOld.getText().isEmpty() || txtContraseñaOld==null){
             JOptionPane.showMessageDialog(this,"debe ingresar su contraseña antigua");
         }else if(txtContraseñaNew1.getText().isEmpty() || txtContraseñaNew1==null){
@@ -145,20 +149,19 @@ public class cambiarContraseña extends javax.swing.JFrame {
                     txtContraseñaOld.setText("");
                     txtContraseñaNew1.setText("");
                     txtContraseñaNew2.setText("");
-                    
-                    Menu m=new Menu();
-                    m.setVisible(true);
                     this.setVisible(false);
+                    Login lo=new Login();
+                    lo.setVisible(true);
                     
                 }else{
                     JOptionPane.showMessageDialog(this,"Error al cambiar cotraseña intentelo nuevamente");
                 }
             }else{
                 JOptionPane.showMessageDialog(this,"Contraseña nueva no coincide");
-            }
+            
         }
         
-        
+      }
         
         
         
@@ -183,8 +186,8 @@ public class cambiarContraseña extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtContraseñaNew1;
-    private javax.swing.JTextField txtContraseñaNew2;
-    private javax.swing.JTextField txtContraseñaOld;
+    private javax.swing.JPasswordField txtContraseñaNew1;
+    private javax.swing.JPasswordField txtContraseñaNew2;
+    private javax.swing.JPasswordField txtContraseñaOld;
     // End of variables declaration//GEN-END:variables
 }

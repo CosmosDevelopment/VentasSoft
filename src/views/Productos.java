@@ -341,7 +341,7 @@ public class Productos extends javax.swing.JFrame {
             
         }catch(Exception e){
             JOptionPane.showMessageDialog (null, "Ha ocurrido un error al guardar el producto", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println(e.getMessage());
+            
         }
     }//GEN-LAST:event_btnAddActionPerformed
 

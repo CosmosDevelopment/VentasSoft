@@ -201,6 +201,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnCambiarContrase&#xf1;a">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/images/pass.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cambiar contrase&#xf1;a"/>
       </Properties>
       <Events>
