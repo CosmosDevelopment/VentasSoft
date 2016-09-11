@@ -822,14 +822,18 @@ public class Clientes extends javax.swing.JFrame {
             Paragraph pProductos= new Paragraph("Productos Comprados: ",
                     FontFactory.getFont("Arial",14,Font.BOLD,BaseColor.BLACK));
             pProductos.setAlignment(Element.ALIGN_CENTER);
-            
+            Paragraph pSaldo= new Paragraph("Saldo:  $"+txtSaldo.getText(),
+                    FontFactory.getFont("Arial",14,Font.BOLD,BaseColor.BLACK));
+            pSaldo.setAlignment(Element.ALIGN_RIGHT);
             //se agregan paragraphs
             document.add(p);
             document.add(pNumero);
             document.add(pNombre);
+            document.add(pSaldo);
             document.add (new Paragraph("\n"));
             document.add(pProductos);
             document.add(new Paragraph("\n"));
+            
             //se agrega tabla productos
             PdfPTable pTablaProducto= new PdfPTable(4);
             
@@ -850,14 +854,18 @@ public class Clientes extends javax.swing.JFrame {
                 
                 pTablaProducto.addCell(new Paragraph(prod.getNombreProducto(), FontFactory.getFont("Arial",10)));
                 pTablaProducto.addCell(new Paragraph(String.valueOf(v.getCantidadVenta()), FontFactory.getFont("Arial",10)));
-                pTablaProducto.addCell(new Paragraph(String.valueOf(prod.getPrecioProducto()), FontFactory.getFont("Arial",10)));
-                pTablaProducto.addCell(new Paragraph(String.valueOf(v.getMontoVenta()), FontFactory.getFont("Arial",10)));
+                pTablaProducto.addCell(new Paragraph("$"+String.valueOf(prod.getPrecioProducto()), FontFactory.getFont("Arial",10)));
+                pTablaProducto.addCell(new Paragraph("$"+String.valueOf(v.getMontoVenta()), FontFactory.getFont("Arial",10)));
                 
             }
             
             
             document.add(pTablaProducto);
             
+            Paragraph pTotalCompra= new Paragraph("Total Compras: "+txtTotalCompras.getText(),
+                    FontFactory.getFont("Arial",12,Font.BOLD,BaseColor.BLACK));
+            pTotalCompra.setAlignment(Element.ALIGN_RIGHT);
+            document.add(pTotalCompra);
             document.add(new Paragraph("\n"));
             
             Paragraph pAbonos= new Paragraph("Abonos: ",
