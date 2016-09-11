@@ -11,6 +11,8 @@ import ctrl.CtrlVenta;
 import entidades.Abono;
 import entidades.Cliente;
 import entidades.Venta;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -62,6 +64,14 @@ public class AddCliente extends javax.swing.JFrame {
     }
     
     @SuppressWarnings("unchecked")
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/icono.png"));
+        
+        
+        return retValue;
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -100,6 +110,7 @@ public class AddCliente extends javax.swing.JFrame {
         btnAddProducto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/guardar.png"))); // NOI18N
@@ -434,13 +445,15 @@ public class AddCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.setEnabled(false);
         MenuCliente mc= new  MenuCliente();
         mc.setVisible(true);
         this.setVisible(false);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        
+        this.setEnabled(false);
         try{
             StringBuilder mensaje=new StringBuilder();
             String titulo="Revise los siguientes datos:\n";
@@ -582,7 +595,7 @@ public class AddCliente extends javax.swing.JFrame {
         catch(Exception e){
             JOptionPane.showMessageDialog (null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+        this.setEnabled(true);
         
 
     }//GEN-LAST:event_btnAddActionPerformed
@@ -600,8 +613,10 @@ public class AddCliente extends javax.swing.JFrame {
     
     
     private void btnAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductoActionPerformed
+        this.setEnabled(false);
         AddProducto  ap= new AddProducto(this);
         ap.setVisible(true);
+        this.setEnabled(true);
 
     }//GEN-LAST:event_btnAddProductoActionPerformed
 
@@ -650,7 +665,7 @@ public class AddCliente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-  
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

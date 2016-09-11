@@ -9,6 +9,12 @@ import ctrl.CtrlAbono;
 import ctrl.CtrlCliente;
 import entidades.Abono;
 import entidades.Cliente;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -18,6 +24,14 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import ctrl.CtrlProducto;
+import ctrl.CtrlVenta;
+import entidades.Producto;
+import entidades.Venta;
+import java.awt.Desktop;
+import java.io.IOException;
 
 /**
  *
@@ -29,6 +43,8 @@ public class Clientes extends javax.swing.JFrame {
     public AddProducto ap;
     CtrlCliente ctrlCliente = new CtrlCliente();
     CtrlAbono ctrlAbono= new CtrlAbono();
+    CtrlVenta ctrlVenta = new CtrlVenta();
+    CtrlProducto ctrlProducto = new CtrlProducto();
     
     public Clientes() {
         
@@ -63,7 +79,7 @@ public class Clientes extends javax.swing.JFrame {
         tableColumn.setMinWidth(0);
         tableColumn.setMaxWidth(0);
         
-         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
         
         tablaProductos.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
@@ -131,8 +147,10 @@ public class Clientes extends javax.swing.JFrame {
         cbMoroso = new javax.swing.JComboBox<>();
         txtID = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -454,6 +472,14 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print.png"))); // NOI18N
+        btnImprimir.setText("Imprimir");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -472,9 +498,7 @@ public class Clientes extends javax.swing.JFrame {
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(btnVolver))
+                        .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -482,7 +506,14 @@ public class Clientes extends javax.swing.JFrame {
                         .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEditar)
-                        .addGap(24, 24, 24))))
+                        .addGap(24, 24, 24))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnVolver)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnImprimir)
+                .addGap(107, 107, 107))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,14 +527,16 @@ public class Clientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnImprimir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -525,11 +558,20 @@ public class Clientes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/icono.png"));
+        
+        
+        return retValue;
+    }
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.setEnabled(false);
         MenuCliente mc= new  MenuCliente();
         mc.setVisible(true);
         this.setVisible(false);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -537,6 +579,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        this.setEnabled(false);
         try {
             Cliente c= ctrlCliente.findByID(txtID.getText());
             StringBuilder mensaje=new StringBuilder();
@@ -624,9 +667,7 @@ public class Clientes extends javax.swing.JFrame {
                 btnAddAbono.setEnabled(false);
             }
             
-//            
-//            c.setMorosoCliente(rootPaneCheckingEnabled);
-//            
+            
             
             ctrlCliente.actualizarCliente(c);
             JOptionPane.showMessageDialog (null, "El cliente se ha actualizado exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
@@ -649,11 +690,12 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog (null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         
-        
+        this.setEnabled(true);
         
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        this.setEnabled(false);
         txtNroCliente.setEditable(true);
         txtNombre.setEditable(true);
         txtApellido.setEditable(true);
@@ -666,9 +708,11 @@ public class Clientes extends javax.swing.JFrame {
         
         btnEditar.setVisible(false);
         btnActualizar.setVisible(true);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnVerAboosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerAboosActionPerformed
+        this.setEnabled(false);
         HistorialAbonos  ha= new HistorialAbonos();
         DefaultTableModel modelo= (DefaultTableModel) ha.tablaAbonos.getModel();
         try {
@@ -692,21 +736,26 @@ public class Clientes extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_btnVerAboosActionPerformed
 
     private void btnAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductoActionPerformed
+        this.setEnabled(false);
         ap= new AddProducto(this);
         ap.txtIDCliente.setText(txtID.getText());
         ap.setVisible(true);
+        this.setEnabled(true);
         
     }//GEN-LAST:event_btnAddProductoActionPerformed
 
     private void btnAddAbonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAbonoActionPerformed
+        this.setEnabled(false);
         ab= new AddAbono(this);
         
         ab.txtIDCliente.setText(txtID.getText());
         
         ab.setVisible(true);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnAddAbonoActionPerformed
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
@@ -721,7 +770,7 @@ public class Clientes extends javax.swing.JFrame {
     private void txtNroClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNroClienteKeyTyped
         char caracter = evt.getKeyChar();
         if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-        evt.consume(); // ignorar el evento de teclado
+            evt.consume(); // ignorar el evento de teclado
         }// TODO add your handling code here:
     }//GEN-LAST:event_txtNroClienteKeyTyped
 
@@ -742,7 +791,7 @@ public class Clientes extends javax.swing.JFrame {
     private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
         char caracter = evt.getKeyChar();
         if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)&& (caracter!='k')&& (caracter!='.')&& (caracter!='-')) {
-        evt.consume(); // ignorar el evento de teclado
+            evt.consume(); // ignorar el evento de teclado
         } 
     }//GEN-LAST:event_txtRutKeyTyped
 
@@ -752,7 +801,119 @@ public class Clientes extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtTelefonoKeyTyped
-      
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        try {
+            OutputStream file = new FileOutputStream(new File("C:\\CuotaSoft\\Historial.pdf"));
+            Document document= new Document();
+            PdfWriter writer;
+            
+            writer = PdfWriter.getInstance(document, file);
+            
+            document.open();
+            // Se agrega titulo y datos del cliente
+            Paragraph p= new Paragraph("Historial de Cliente \n",
+                    FontFactory.getFont("Arial",16,Font.BOLD,BaseColor.BLACK));
+            p.setAlignment(Element.ALIGN_CENTER);
+            Paragraph pNumero= new Paragraph("N° Cliente: "+txtNroCliente.getText(),
+                    FontFactory.getFont("Arial",12,Font.NORMAL,BaseColor.BLACK));
+            Paragraph pNombre= new Paragraph("Nombre Cliente: "+txtNombre.getText()+" "+txtApellido.getText(),
+                    FontFactory.getFont("Arial",12,Font.NORMAL,BaseColor.BLACK));
+            Paragraph pProductos= new Paragraph("Productos Comprados: ",
+                    FontFactory.getFont("Arial",14,Font.BOLD,BaseColor.BLACK));
+            pProductos.setAlignment(Element.ALIGN_CENTER);
+            
+            //se agregan paragraphs
+            document.add(p);
+            document.add(pNumero);
+            document.add(pNombre);
+            document.add (new Paragraph("\n"));
+            document.add(pProductos);
+            document.add(new Paragraph("\n"));
+            //se agrega tabla productos
+            PdfPTable pTablaProducto= new PdfPTable(4);
+            
+            float[] mediaCeldasProductos ={3.30f,3.50f,3.50f,3.70f};
+            
+            pTablaProducto.setWidths(mediaCeldasProductos);
+            pTablaProducto.addCell(new Paragraph("Producto", FontFactory.getFont("Arial",12)));
+            pTablaProducto.addCell(new Paragraph("Cantidad", FontFactory.getFont("Arial",12)));
+            pTablaProducto.addCell(new Paragraph("Precio", FontFactory.getFont("Arial",12)));
+            pTablaProducto.addCell(new Paragraph("Total", FontFactory.getFont("Arial",12)));
+            
+            
+            
+            ArrayList <Venta> listaProductos= ctrlVenta.listByCliente(Integer.parseInt(txtID.getText()));
+            
+            for(Venta v: listaProductos){
+                Producto prod=ctrlProducto.buscarPorID(v.getProducto().getIdProducto());
+                
+                pTablaProducto.addCell(new Paragraph(prod.getNombreProducto(), FontFactory.getFont("Arial",10)));
+                pTablaProducto.addCell(new Paragraph(String.valueOf(v.getCantidadVenta()), FontFactory.getFont("Arial",10)));
+                pTablaProducto.addCell(new Paragraph(String.valueOf(prod.getPrecioProducto()), FontFactory.getFont("Arial",10)));
+                pTablaProducto.addCell(new Paragraph(String.valueOf(v.getMontoVenta()), FontFactory.getFont("Arial",10)));
+                
+            }
+            
+            
+            document.add(pTablaProducto);
+            
+            document.add(new Paragraph("\n"));
+            
+            Paragraph pAbonos= new Paragraph("Abonos: ",
+                    FontFactory.getFont("Arial",14,Font.BOLD,BaseColor.BLACK));
+            pAbonos.setAlignment(Element.ALIGN_CENTER);
+            
+            document.add(pAbonos);
+            
+            document.add(new Paragraph("\n"));
+            PdfPTable tablaAbonos= new PdfPTable(3);
+            
+            float[] mediaCeldasAbonos ={3.30f,3.50f,3.50f};
+            
+            tablaAbonos.setWidths(mediaCeldasAbonos);
+            tablaAbonos.addCell(new Paragraph("Fecha", FontFactory.getFont("Arial",12)));
+            tablaAbonos.addCell(new Paragraph("Monto", FontFactory.getFont("Arial",12)));
+            tablaAbonos.addCell(new Paragraph("Saldo", FontFactory.getFont("Arial",12)));
+            
+            ArrayList<Abono> listaAbonos= ctrlAbono.listByCliente(txtID.getText());
+            SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
+            
+            if(listaAbonos.size()>0){
+                for(Abono a: listaAbonos){
+                    
+                    tablaAbonos.addCell(new Paragraph(sdf.format(a.getFechaAbono()), FontFactory.getFont("Arial",10)));
+                    tablaAbonos.addCell(new Paragraph("$"+String.valueOf(a.getMontoAbono()), FontFactory.getFont("Arial",10)));
+                    tablaAbonos.addCell(new Paragraph("$"+String.valueOf(a.getSaldoAbono()), FontFactory.getFont("Arial",10)));
+                }
+                
+            }
+            document.add(tablaAbonos);
+            
+            document.close();
+            file.close();
+            
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try{
+            File file = new File("C:\\CuotaSoft\\Historial.pdf");
+            Desktop.getDesktop().open(file);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnImprimirActionPerformed
+    
     
     
     private static boolean isNumeric(String cadena){
@@ -773,6 +934,7 @@ public class Clientes extends javax.swing.JFrame {
     public javax.swing.JButton btnAddAbono;
     public javax.swing.JButton btnAddProducto;
     public javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnVerAboos;
     private javax.swing.JButton btnVolver;
     public javax.swing.JComboBox<String> cbEstado;

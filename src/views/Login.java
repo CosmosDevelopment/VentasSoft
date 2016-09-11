@@ -129,6 +129,7 @@ public class Login extends javax.swing.JFrame {
         return retValue;
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setEnabled(false);
         if(txtPass.getText().equals(" ")){
             JOptionPane.showMessageDialog(this,evt,"Debe ingresar contraseña", WIDTH);
         } else {
@@ -148,7 +149,7 @@ public class Login extends javax.swing.JFrame {
             }
         }
         
-        
+        this.setEnabled(true);
         
         
         

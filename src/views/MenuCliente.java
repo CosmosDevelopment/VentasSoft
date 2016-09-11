@@ -13,6 +13,8 @@ import entidades.Abono;
 import entidades.Cliente;
 import entidades.Producto;
 import entidades.Venta;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,7 +51,7 @@ public class MenuCliente extends javax.swing.JFrame {
         tableColumn.setPreferredWidth(0);
         tableColumn.setMinWidth(0);
         tableColumn.setMaxWidth(0);
-       DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
         
         tablaClientes.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
@@ -89,6 +91,7 @@ public class MenuCliente extends javax.swing.JFrame {
         tablaClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
@@ -241,11 +244,20 @@ public class MenuCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/icono.png"));
+        
+        
+        return retValue;
+    }
     private void botonAddClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAddClienteActionPerformed
+        this.setEnabled(false);
         AddCliente ac= new AddCliente();
         ac.setVisible(true);
         this.setVisible(false);
+        this.setEnabled(true);
     }//GEN-LAST:event_botonAddClienteActionPerformed
 
     private void cbBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBuscarClienteActionPerformed
@@ -253,12 +265,15 @@ public class MenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_cbBuscarClienteActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.setEnabled(false);
         this.setVisible(false);
         Menu m=new Menu();
-        m.setVisible(true);// TODO add your handling code here:
+        m.setVisible(true);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+        this.setEnabled(false);
         try{
             List<Cliente> listaClientes;
             if(cbBuscarCliente.getSelectedItem().toString().equals("RUT")){
@@ -322,6 +337,7 @@ public class MenuCliente extends javax.swing.JFrame {
         catch(Exception e){
             System.err.println(e.getMessage());
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     private void tablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMouseClicked
@@ -399,8 +415,8 @@ public class MenuCliente extends javax.swing.JFrame {
         if(cbBuscarCliente.getSelectedItem().equals("RUT")){
             char caracter = evt.getKeyChar();
             if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)&& (caracter!='k')&& (caracter!='.')&& (caracter!='-')) {
-            evt.consume(); // ignorar el evento de teclado
-            } 
+                evt.consume(); // ignorar el evento de teclado
+            }
         }else if (cbBuscarCliente.getSelectedItem().equals("Nombre")){
             char caracter  = evt.getKeyChar();
             if(Character.isDigit(caracter)){
@@ -414,7 +430,7 @@ public class MenuCliente extends javax.swing.JFrame {
         }else if (cbBuscarCliente.getSelectedItem().equals("Número Cliente")){
             char caracter = evt.getKeyChar();
             if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-            evt.consume(); // ignorar el evento de teclado
+                evt.consume(); // ignorar el evento de teclado
             }
         }
     }//GEN-LAST:event_txtBusquedaKeyTyped
@@ -422,7 +438,7 @@ public class MenuCliente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAddCliente;

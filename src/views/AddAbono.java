@@ -9,6 +9,8 @@ import ctrl.CtrlAbono;
 import ctrl.CtrlCliente;
 import entidades.Abono;
 import entidades.Cliente;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 /**
@@ -34,6 +36,14 @@ public class AddAbono extends javax.swing.JFrame {
     
     
     @SuppressWarnings("unchecked")
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/icono.png"));
+        
+        
+        return retValue;
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -48,6 +58,7 @@ public class AddAbono extends javax.swing.JFrame {
         txtIDCliente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
@@ -147,6 +158,7 @@ public class AddAbono extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        this.setEnabled(false);
         try{
             StringBuilder mensaje=new StringBuilder();
             
@@ -206,16 +218,19 @@ public class AddAbono extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog (null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_btnGuardarActionPerformed
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();        
+        this.setEnabled(false);
+        this.dispose();
+        this.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
-         char caracter = evt.getKeyChar();
+        char caracter = evt.getKeyChar();
         if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
-        evt.consume(); // ignorar el evento de teclado
+            evt.consume(); // ignorar el evento de teclado
         }
     }//GEN-LAST:event_txtMontoKeyTyped
     private static boolean isNumeric(String cadena){

@@ -6,6 +6,8 @@
 package views;
 
 import ctrl.BackUp;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -49,6 +51,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 204));
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         panelMenu.setName("panelMenu"); // NOI18N
@@ -183,41 +186,59 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/icono.png"));
+        
+        
+        return retValue;
+    }
     private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
+        this.setEnabled(false);
         this.setVisible(false);
         Login log=new  Login();
         log.setVisible(true);
+        this.setEnabled(true);
     }//GEN-LAST:event_botonCerrarSesionActionPerformed
 
     private void btnAreaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaClienteActionPerformed
+        this.setEnabled(false);
+        
         MenuCliente m= new MenuCliente();
         m.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        this.setVisible(false);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnAreaClienteActionPerformed
 
     private void btnAreaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaProductoActionPerformed
+        
+        this.setEnabled(false);
         MenuProducto mp= new MenuProducto();
         mp.setVisible(true);
         this.setVisible(false);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnAreaProductoActionPerformed
 
     private void btnBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpActionPerformed
+        this.setEnabled(false);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date fecha= new Date();
         String fechaConvert= sdf.format(fecha);
         
         
-        new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","C:\\Dumps\\dump-"+fechaConvert  +".sql");
+        new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","C:\\CuotaSoft\\Dumps\\dump-"+fechaConvert  +".sql");
         JOptionPane.showMessageDialog (null, "Respaldo generado exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         
-        
+        this.setEnabled(true);
     }//GEN-LAST:event_btnBackUpActionPerformed
 
     private void btnCambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarContraseñaActionPerformed
+        this.setEnabled(false);
         cambiarContraseña cambiarPass = new cambiarContraseña();
         cambiarPass.setVisible(true);
         this.setVisible(false);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnCambiarContraseñaActionPerformed
     
     /**

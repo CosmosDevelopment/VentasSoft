@@ -7,6 +7,8 @@ package views;
 
 import ctrl.CtrlProducto;
 import entidades.Producto;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,6 +72,7 @@ public class MenuProducto extends javax.swing.JFrame {
         listaProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans Light", 0, 24)); // NOI18N
@@ -213,21 +216,32 @@ public class MenuProducto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/icono.png"));
+        
+        
+        return retValue;
+    }
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.setEnabled(false);
         this.setVisible(false);
         Menu m=new Menu();
-        m.setVisible(true);// TODO add your handling code here:
+        m.setVisible(true);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void botonAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAddProductoActionPerformed
+        this.setEnabled(false);
         Productos p= new Productos();
         p.setVisible(true);
         this.setVisible(false);
+        this.setEnabled(true);
     }//GEN-LAST:event_botonAddProductoActionPerformed
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        
+        this.setEnabled(false);
         try {
             
             if(txtBusqueda.getText().isEmpty() || txtBusqueda.getText()== null){
@@ -271,7 +285,7 @@ public class MenuProducto extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(MenuProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        this.setEnabled(true);
         
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
@@ -307,7 +321,7 @@ public class MenuProducto extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
- 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAddProducto;
     private javax.swing.JButton btnBuscarProducto;

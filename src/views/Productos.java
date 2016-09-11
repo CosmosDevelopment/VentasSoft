@@ -8,6 +8,7 @@ package views;
 import ctrl.CtrlProducto;
 import entidades.Producto;
 import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -62,6 +63,7 @@ public class Productos extends javax.swing.JFrame {
         txtID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/guardar.png"))); // NOI18N
@@ -245,14 +247,24 @@ public class Productos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/icono.png"));
+        
+        
+        return retValue;
+    }
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.setEnabled(false);
         MenuProducto mc= new  MenuProducto();
         mc.setVisible(true);
         this.setVisible(false);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        this.setEnabled(false);
         try{
             StringBuilder mensaje=new StringBuilder();
             String titulo="Revise los siguientes datos:\n";
@@ -343,15 +355,18 @@ public class Productos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog (null, "Ha ocurrido un error al guardar el producto", "Error", JOptionPane.ERROR_MESSAGE);
             
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        this.setEnabled(false);
         txtNombreProducto.setEditable(true);
         txtCantidadProducto.setEditable(true);
         txtPrecioProducto.setEditable(true);
         cbEstado.setEnabled(true);
         btnAdd.setText("Actualizar");
         btnEditar.setVisible(false);
+        this.setEnabled(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProductoActionPerformed
@@ -363,10 +378,7 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_cbEstadoActionPerformed
 
     private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
-        char caracter  = evt.getKeyChar();
-        if(Character.isDigit(caracter)){
-            evt.consume();
-        }
+       
     }//GEN-LAST:event_txtNombreProductoKeyTyped
 
     private void txtCantidadProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadProductoKeyTyped
@@ -395,7 +407,7 @@ public class Productos extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
- 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     public javax.swing.JButton btnEditar;
