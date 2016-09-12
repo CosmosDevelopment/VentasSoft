@@ -372,8 +372,8 @@ public class MenuCliente extends javax.swing.JFrame {
                 fila[0] = p.getIdProducto().toString();
                 fila[1] = p.getNombreProducto();
                 fila[2] = String.valueOf(v.getCantidadVenta());
-                fila[3] = String.valueOf(p.getPrecioProducto());
-                fila[4] = String.valueOf(v.getMontoVenta());
+                fila[3] = "$"+String.valueOf(p.getPrecioProducto());
+                fila[4] = "$"+String.valueOf(v.getMontoVenta());
                 
                 modelo.addRow(fila);
             }

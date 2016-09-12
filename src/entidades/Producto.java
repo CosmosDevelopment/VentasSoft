@@ -1,5 +1,5 @@
 package entidades;
-// Generated 04-09-2016 05:14:23 PM by Hibernate Tools 4.3.1
+// Generated 12-09-2016 05:39:30 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
