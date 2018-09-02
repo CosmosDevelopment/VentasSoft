@@ -58,20 +58,23 @@ public class daoAbono {
         return abono;
     }
     
-    public ArrayList<Abono> getAbonoById(int id_abono)throws Exception {
+    public Abono getAbonoById(String idAbono)throws Exception {
         iniciaOperacion();
-        Transaction tx = session.beginTransaction();
-        ArrayList<Abono> abono = (ArrayList<Abono>) session.createQuery("From Abono abo where abo.id_abono="+id_abono).list();
+        Transaction tx = session.beginTransaction();               
+        Query query= session.createQuery("From Abono ab where ab.idAbono=:idAbono");
+        query.setParameter("idAbono",  Integer.parseInt(idAbono) );
+        Abono ab = (Abono) query.uniqueResult();
         session.flush();
         tx.commit();
-        return abono;
+        return ab;
+        
     }
     
     public ArrayList<Abono> getAbonoByIdCliente(int idCliente)throws Exception {
         iniciaOperacion();
         Transaction tx = session.beginTransaction();
         Query query=session.createQuery("From Abono abo where abo.cliente.idCliente=:idCliente");
-        query.setParameter("idCliente", idCliente);        
+        query.setParameter("idCliente", idCliente);
         ArrayList<Abono> abono = (ArrayList<Abono>) query.list();
         session.flush();
         tx.commit();

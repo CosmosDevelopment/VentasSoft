@@ -34,4 +34,12 @@ public class CtrlAbono {
         }
         
     }
+    public boolean eliminarAbono(String idAbono) throws Exception {
+        Abono abono= da.getAbonoById(idAbono);        
+        return da.deleteAbono(abono);
+    }   
+     public Abono findByID(String id) throws Exception{
+        return da.getAbonoById(id);
+    }
+    
 }

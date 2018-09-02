@@ -76,4 +76,15 @@ public class daoVenta {
         tx.commit();
         return venta;
     }
+    
+    public Venta getVentabyID(int idVenta) throws Exception{
+        iniciaOperacion();
+        Transaction tx = session.beginTransaction();
+        Query query=session.createQuery("From Venta v where v.idVenta =:idVenta");
+        query.setParameter("idVenta",  idVenta );
+        Venta v= (Venta) query.uniqueResult();
+        session.flush();
+        tx.commit();
+        return v;
+    }
 }

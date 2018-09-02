@@ -227,7 +227,7 @@ public class Menu extends javax.swing.JFrame {
         String fechaConvert= sdf.format(fecha);
         
         
-        new BackUp().CrearBackup("localhost", "3306", "root", "root", "softventas","C:\\CuotaSoft\\Dumps\\dump-"+fechaConvert  +".sql");
+        new BackUp().CrearBackup("localhost", "3306", "csAdmin", "csCosmoDev", "softventas","C:\\Program Files\\CuotaSoft\\Dumps\\dump-"+fechaConvert  +".sql");
         JOptionPane.showMessageDialog (null, "Respaldo generado exitosamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         
         this.setEnabled(true);

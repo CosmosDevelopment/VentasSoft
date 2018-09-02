@@ -13,6 +13,11 @@ public class CtrlProducto {
         p.setEstadoProducto(true);
         dp.insertProducto(p);
         
+    }     
+    public void eliminarProducto(Producto p) throws Exception{
+        p.setEstadoProducto(true);
+        dp.deleteProducto(p);
+        
     }
     public void actualizarProducto(Producto p) throws Exception{
         

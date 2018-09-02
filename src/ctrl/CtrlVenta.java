@@ -13,6 +13,15 @@ public class CtrlVenta {
         
         dv.insertVenta(venta);
     }
+    public void eliminarVenta(Venta venta) throws Exception{
+        
+        dv.deleteVenta(venta);
+    }
+    public void updateVenta(Venta venta) throws Exception{
+        
+        dv.updateVenta(venta);
+    }
+    
     public ArrayList<Venta> listByCliente(int idCliente) throws Exception{
         ArrayList<Venta> listaVenta= new ArrayList<Venta>();
         if(dv.getVentasByIdCliente(idCliente).size()>0){
@@ -20,5 +29,9 @@ public class CtrlVenta {
         }
         
         return listaVenta;
+    }
+    
+    public Venta  buscarPorID(int id) throws Exception{
+        return dv.getVentabyID(id);
     }
 }

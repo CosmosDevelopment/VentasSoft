@@ -357,11 +357,11 @@ public class AddProducto extends javax.swing.JFrame {
                         ctrlCliente.actualizarCliente(c);
                         JOptionPane.showMessageDialog (null, "El producto se ha agregado a la lista exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
                         
-                        clientes.txtTotalCompras.setText("$"+String.valueOf(c.getTotalcomprasCliente()));
+                        clientes.txtTotalCompras.setText(String.valueOf(c.getTotalcomprasCliente()));
                         Integer saldo= c.getTotalcomprasCliente()-c.getTotalabonoCliente();
                         clientes.txtSaldo.setText(saldo.toString());
                         DefaultTableModel model = (DefaultTableModel) clientes.tablaProductos.getModel();
-                        model.addRow(new Object[]{p.getIdProducto().toString(),p.getNombreProducto(),venta.getCantidadVenta() ,"$"+p.getPrecioProducto(),"$"+venta.getMontoVenta()});
+                        model.addRow(new Object[]{p.getIdProducto().toString(),p.getNombreProducto(),venta.getCantidadVenta() ,"$"+p.getPrecioProducto(),"$"+venta.getMontoVenta(),Integer.toString(venta.getIdVenta())});
                         
                         clientes.tablaProductos.setModel(model);
                         this.dispose();
@@ -388,9 +388,11 @@ public class AddProducto extends javax.swing.JFrame {
                         
                         JOptionPane.showMessageDialog (null, "El producto se ha agregado a la lista exitosamente", "Aviso", JOptionPane.DEFAULT_OPTION);
                         Integer totalComprasView= Integer.parseInt(addCliente.totalCompra)+venta.getMontoVenta();
-                        addCliente.txtTotalCompras.setText("$"+totalComprasView.toString());
+                        addCliente.txtTotalCompras.setText(totalComprasView.toString());
                         addCliente.totalCompra=totalComprasView.toString();
                         DefaultTableModel model = (DefaultTableModel) addCliente.tablaProductos.getModel();
+                       
+                        
                         model.addRow(new Object[]{p.getIdProducto().toString(),p.getNombreProducto(),venta.getCantidadVenta() ,"$"+p.getPrecioProducto(),"$"+venta.getMontoVenta()});
                         
                         addCliente.tablaProductos.setModel(model);

@@ -361,19 +361,20 @@ public class MenuCliente extends javax.swing.JFrame {
             viewCliente.txtTelefono.setText(c.getTelefonoCliente());
             Integer saldo= c.getTotalcomprasCliente()-c.getTotalabonoCliente();
             viewCliente.txtSaldo.setText(saldo.toString());
-            viewCliente.txtTotalCompras.setText("$"+String.valueOf(c.getTotalcomprasCliente()));
+            viewCliente.txtTotalCompras.setText(String.valueOf(c.getTotalcomprasCliente()));
             
             ArrayList <Venta> listaProductos= ctrlVenta.listByCliente(c.getIdCliente());
             DefaultTableModel modelo= (DefaultTableModel) viewCliente.tablaProductos.getModel();
             
             for(Venta v: listaProductos){
                 Producto p=ctrlProducto.buscarPorID(v.getProducto().getIdProducto());
-                String[] fila = new String[5];
+                String[] fila = new String[6];
                 fila[0] = p.getIdProducto().toString();
                 fila[1] = p.getNombreProducto();
                 fila[2] = String.valueOf(v.getCantidadVenta());
                 fila[3] = "$"+String.valueOf(p.getPrecioProducto());
                 fila[4] = "$"+String.valueOf(v.getMontoVenta());
+                fila[5] = Integer.toString(v.getIdVenta());
                 
                 modelo.addRow(fila);
             }

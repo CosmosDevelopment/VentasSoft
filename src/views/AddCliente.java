@@ -7,15 +7,19 @@ package views;
 
 import ctrl.CtrlAbono;
 import ctrl.CtrlCliente;
+import ctrl.CtrlProducto;
 import ctrl.CtrlVenta;
 import entidades.Abono;
 import entidades.Cliente;
+import entidades.Producto;
 import entidades.Venta;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -30,12 +34,17 @@ public class AddCliente extends javax.swing.JFrame {
     
     // instancia ctrl y view
     CtrlCliente ctrlCliente = new CtrlCliente();
+    CtrlProducto ctrlProducto= new CtrlProducto();
     CtrlAbono ctrlAbono = new CtrlAbono();
     CtrlVenta ctrlVenta= new CtrlVenta();
     
     public  Set<Venta> setVenta = new HashSet<Venta>();
     public String totalCompra="0";
     
+    public int row=0;
+    public int valorCompra=0;
+    public int cantProducto=0;
+    public int idProducto=0;
     
     public AddCliente() {
         initComponents();
@@ -108,6 +117,7 @@ public class AddCliente extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
         btnAddProducto = new javax.swing.JButton();
+        btnDelProducto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -353,6 +363,11 @@ public class AddCliente extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tablaProductos);
 
         btnAddProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
@@ -363,6 +378,15 @@ public class AddCliente extends javax.swing.JFrame {
             }
         });
 
+        btnDelProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
+        btnDelProducto.setText("Eliminar");
+        btnDelProducto.setToolTipText("");
+        btnDelProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelProductoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -370,20 +394,23 @@ public class AddCliente extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addComponent(btnAddProducto)
-                .addGap(45, 45, 45))
+                .addGap(48, 48, 48)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAddProducto)
+                    .addComponent(btnDelProducto))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(btnAddProducto))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33))
+                        .addComponent(btnAddProducto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDelProducto)))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -661,6 +688,47 @@ public class AddCliente extends javax.swing.JFrame {
             evt.consume(); // ignorar el evento de teclado
         }
     }//GEN-LAST:event_txtPieKeyTyped
+
+    private void btnDelProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelProductoActionPerformed
+        try {
+            DefaultTableModel model = (DefaultTableModel) tablaProductos.getModel();
+            model.removeRow(row);
+          
+            int totalComprasActualizado=Integer.parseInt(txtTotalCompras.getText())-valorCompra;
+            
+            System.out.println(txtTotalCompras.getText()+"-"+totalComprasActualizado+"-"+valorCompra);
+            
+            txtTotalCompras.setText(Integer.toString(totalComprasActualizado));
+            
+            Producto p=ctrlProducto.buscarPorID(idProducto);
+            p.setCantidadProducto(p.getCantidadProducto()+cantProducto);
+            ctrlProducto.actualizarProducto(p);
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(AddCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_btnDelProductoActionPerformed
+
+    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
+        
+        row = tablaProductos.getSelectedRow();
+        Integer txtCantProducto=(Integer)tablaProductos.getValueAt(tablaProductos.getSelectedRow(),2);
+        String txtIdProducto=(String)tablaProductos.getValueAt(tablaProductos.getSelectedRow(),0);
+        String txtValorCompra=(String)tablaProductos.getValueAt(tablaProductos.getSelectedRow(),4);
+        
+        cantProducto=txtCantProducto;
+        idProducto=Integer.parseInt(txtIdProducto);
+        valorCompra= Integer.parseInt(txtValorCompra.substring(1,txtValorCompra.length()));
+        
+        
+        
+        
+    }//GEN-LAST:event_tablaProductosMouseClicked
     
     /**
      * @param args the command line arguments
@@ -670,6 +738,7 @@ public class AddCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     public javax.swing.JButton btnAddProducto;
+    public javax.swing.JButton btnDelProducto;
     private javax.swing.JButton btnVolver;
     private com.toedter.calendar.JDateChooser fechaPie;
     private javax.swing.JLabel jLabel1;
